@@ -1,0 +1,14 @@
+<label class="form-label">{{label}}</label>
+<select [(ngModel)]="value" class="form-select">
+  <option [value]="null" selected>Open this select menu</option>
+  <option [value]="item[itemKey]" *ngFor="let item of items; let i = index">
+    {{item[itemLabel]}}
+  </option>
+</select>
+<p *ngIf="errorMessage">{{errorMessage}}</p>
+
+<!-- ricordarsi sempre di mettere nell'ordine: LABEL, TD INPUT, ERROR MESSAGE-->
+
+
+
+

@@ -1,0 +1,14 @@
+<h1 class="mb-4">FORMS</h1>
+<form [formGroup]="detailsForm" (ngSubmit)="update()">
+    <app-input-string label="dogName" formControlName="dogName" ></app-input-string>
+
+    <app-input-string label="breed" formControlName="breed" ></app-input-string>
+
+    <app-input-string label="dogAge" formControlName="dogAge" ></app-input-string>
+
+    <app-select label="dogSex" formControlName="sexSelect" [items]="selectItems" ></app-select>
+
+    <!--aggiungere input per dogWeight-->
+
+  <button type="submit" class="btn btn-primary" [disabled]="!detailsForm.valid">Signup!</button>
+</form>

@@ -1,0 +1,6 @@
+<button (click)="getClienti()">load fatture</button>
+<ul>
+    <li *ngFor="let f of fatture; let  i=index ">
+        fattura {{ i }}: {{ f.data}} - {{f.importo}}
+    </li>
+</ul>
