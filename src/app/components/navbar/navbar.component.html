@@ -5,9 +5,6 @@
                 <li class="nav-item">
                     <a class="nav-link" *ngIf="!isLoggedIn" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
                 </li>
-                <li class="nav-item" *ngIf="!isLoggedIn">
-                    <a class="nav-link" routerLink="/sports" routerLinkActive="active">Sports</a>
-                </li>
                <li class="nav-item" *ngIf="!isLoggedIn">
                 <a class="nav-link" [routerLink]="['/login']" routerLinkActive="active">Login</a>
                </li>
@@ -17,13 +14,13 @@
 
               <!-- se user loggato-->
               <li class="nav-item" *ngIf="isLoggedIn">
-                <a class="nav-link" [routerLink]="['/userDetails']" routerLinkActive="active" (click)="detailsSrv.inLoggedUserPage()">Profilo</a>
+                <a class="nav-link" [routerLink]="['/userPage']" routerLinkActive="active" (click)="detailsSrv.inLoggedUserPage()">Profilo</a>
               </li>
               <li class="nav-item" *ngIf="isLoggedIn">
                 <a class="nav-link" [routerLink]="['/users']" routerLinkActive="active" (click)="detailsSrv.notInLoggedUserPage()">Users</a>
               </li>
               <li class="nav-item" *ngIf="isLoggedIn">
-                <a class="nav-link" [routerLink]="['/']" routerLinkActive="active">Notifications</a>
+                <a class="nav-link" [routerLink]="['/notifications']" routerLinkActive="active">Notifications</a>
               </li>
               <li class="nav-item" *ngIf="isLoggedIn">
                 <a class="nav-link" [routerLink]="['/']" routerLinkActive="active">Chat</a>

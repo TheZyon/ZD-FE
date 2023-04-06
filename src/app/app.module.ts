@@ -10,6 +10,19 @@ import{FormsModule} from "@angular/forms";
 import {ReactiveFormsModule} from "@angular/forms";
 import { CarouselUsersComponent } from './components/carousel-users/carousel-users.component';
 import {UserProfileModule} from "./user-profile/user-profile.module";
+import {StoreModule} from '@ngrx/store';
+import {userDetailsReducer} from "./ngRxState/user-details.reducer";
+import { UserPageComponent } from './components/user-page/user-page.component';
+import {likesReducer} from "./ngRxState/likes.reducer";
+import {USERNAME_TOKEN} from "../environments/environment";
+import {AuthService} from "./auth/auth.service";
+import {map} from "rxjs/operators";
+import {forkJoin} from "rxjs";
+
+
+/* function loggedUserUsername(_: AuthService) { //TODO: verificare
+  return _.username$.toPromise();
+ }*/
 
 
 @NgModule({
@@ -17,7 +30,8 @@ import {UserProfileModule} from "./user-profile/user-profile.module";
         AppComponent,
         NavbarComponent,
         ProvaComponent,
-        CarouselUsersComponent
+        CarouselUsersComponent,
+        UserPageComponent
     ],
     imports: [
         BrowserModule,
@@ -26,9 +40,12 @@ import {UserProfileModule} from "./user-profile/user-profile.module";
         HttpClientModule,
         FormsModule,
         ReactiveFormsModule,
-        UserProfileModule
+        UserProfileModule,
+        StoreModule.forRoot({usersDetails: userDetailsReducer, likes: likesReducer})
     ],
-    providers: [],
+    providers: [
+      // {provide: USERNAME_TOKEN, useFactory: loggedUserUsername, deps:[AuthService]}
+    ],
     exports: [
 
     ],

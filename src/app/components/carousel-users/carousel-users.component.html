@@ -1,3 +1,13 @@
 <p>carousel-users works!</p>
 
-<app-user-profile></app-user-profile>
+
+<div *ngIf="!thereAreNoMoreUsers">
+  <app-user-card [userDetails]="details[indexCurrentUser]" (nextEvent)="next($event)" (likeEvent)="like($event)" [isOfLoggedUser]="false"></app-user-card>
+</div>
+
+<div *ngIf="thereAreNoMoreUsers">
+  <h2>
+    no more users to see for today!!
+  </h2>
+</div>
+

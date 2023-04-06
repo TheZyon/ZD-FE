@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { UserProfileComponent } from './user-profile/user-profile.component';
+import { ProfileCard } from './user-profile/profile-card.component';
 import {RouterModule, Routes} from "@angular/router";
 import { UserDetailsFormComponent } from './user-details-form/user-details-form.component';
 import {ReactiveFormsModule} from "@angular/forms";
@@ -10,7 +10,7 @@ import {MyformModule} from "../forms/myform.module";
 const routes: Routes=[
   {
     path:'',
-    component: UserProfileComponent
+    component: ProfileCard
   },
   {
     path:'modificaProfilo',
@@ -19,11 +19,11 @@ const routes: Routes=[
 ]
 @NgModule({
   declarations: [
-    UserProfileComponent,
+    ProfileCard,
     UserDetailsFormComponent
   ],
   exports: [
-    UserProfileComponent
+    ProfileCard
   ],
   imports: [
     CommonModule,

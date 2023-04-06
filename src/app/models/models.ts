@@ -1,19 +1,4 @@
 
-export interface StatoFattura{
-    id:number,
-    nome: string
-}
-export interface Fattura{
-    anno: number
-    beServiceStatoFattura: StatoFattura
-
-    data: string
-
-    id: number
-    importo: number
-
-    numero: number
-}
 export interface Page<T>{
   content: T[],
   empty: boolean,

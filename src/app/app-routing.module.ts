@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './auth/auth.guard';
 import {CarouselUsersComponent} from "./components/carousel-users/carousel-users.component";
+import {UserPageComponent} from "./components/user-page/user-page.component";
 
 
 const routes: Routes = [
@@ -15,18 +16,18 @@ const routes: Routes = [
     }
   },
   {
-    path:'users',
-    component:CarouselUsersComponent,
+    path:'userPage',
+    component:UserPageComponent,
     canActivate:[AuthGuard]
   },
   {
-    path: 'sports',
-    loadChildren: ()=>{return import('./sports/sports.module').then((m)=>{return m.SportsModule})},
+    path:'users',
+    component: CarouselUsersComponent,
     canActivate: [AuthGuard]
   },
   {
-    path:'userDetails',
-    loadChildren: ()=>{return import('src/app/user-profile/user-profile.module').then((m)=>{return m.UserProfileModule})},
+    path:'notifications',
+    loadChildren: ()=>{return import('src/app/notifications/notifications.module').then((m)=>{return m.NotificationsModule})},
     canActivate: [AuthGuard]
   }
 ];

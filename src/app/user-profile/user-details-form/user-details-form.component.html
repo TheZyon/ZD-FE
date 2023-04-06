@@ -1,5 +1,6 @@
-<h1 class="mb-4">FORMS</h1>
-<form [formGroup]="detailsForm" (ngSubmit)="update()">
+<h3 class="mb-4">User Detail Form</h3>
+<div class="container">
+  <form [formGroup]="detailsForm" (ngSubmit)="update()">
     <app-input-string label="dogName" formControlName="dogName" ></app-input-string>
 
     <app-input-string label="breed" formControlName="breed" ></app-input-string>
@@ -10,5 +11,7 @@
 
     <!--aggiungere input per dogWeight-->
 
-  <button type="submit" class="btn btn-primary" [disabled]="!detailsForm.valid">Signup!</button>
-</form>
+    <button type="submit" class="btn btn-primary mt-3" [disabled]="!detailsForm.valid">Signup!</button>
+  </form>
+</div>
+

@@ -1,0 +1,20 @@
+<div class="container">
+  <div>
+    <img height="100px" src="/assets/profiloA.jpg" alt="immagineDemo">
+  </div>
+  <div>
+    <div class="text-center">
+      <h3>{{userDetails.dogName}}</h3>
+      <h6>{{userDetails.dogAge}} yo, {{userDetails.breed}}...the owner is {{userDetails.username}}!</h6>
+      <p>
+        Cane sonato come pochi, passa le sue giornate a guardare nel vuoto meditabondo;
+        probabile reincarnazione del Dio cane con la Cuccia.
+      </p>
+
+    </div>
+  </div>
+
+  <button type="button" class="btn btn-success" *ngIf="!isOfLoggedUser" (click)="like()">like</button> <!--lancia likeEvent al padre-->
+  <button type="button" class="btn btn-danger" *ngIf="!isOfLoggedUser" (click)="next()" >manda fanculo</button><!--lancia nextEvent al padre-->
+  <button type="button" class="btn btn-primary" (click)="printUsernames() ">print usernames</button>
+</div>

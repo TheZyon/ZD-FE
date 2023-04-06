@@ -1,11 +1,12 @@
-import { Injectable } from '@angular/core';
+import {Injectable, Injector} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { BehaviorSubject, throwError } from 'rxjs';
+import {BehaviorSubject, Subject, throwError} from 'rxjs';
 // map sesrve per guardre la risposta del login e vedere se i dati coincidono
 import { catchError, map, tap } from 'rxjs/operators';
-import {urlBaseBE, urlLogIn, urlSignUp} from "../../environments/environment";
+import {urlBaseBE, urlLogIn, urlSignUp, USERNAME_TOKEN} from "../../environments/environment";
+import {UserDetailsService} from "../services/user-details.service";
 
 export interface SignupData {
     name: string;
@@ -22,9 +23,9 @@ export interface LoginData {
 
 export interface AuthData {
     accessToken: string;
-    user: {
+
         username: string
-    };
+
 }
 
 @Injectable({
