@@ -95,8 +95,6 @@ export class UserDetailsFormComponent implements OnInit, OnDestroy{
   * */
   update() {
 
-
-
     let newUserDetails: UserDetails={//1.
       username: this.detailsForm.controls['username'].value,
       dogName:this.detailsForm.controls['dogName'].value,

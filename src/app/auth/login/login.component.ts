@@ -10,6 +10,7 @@ import {concatMap, Subscription, zip} from "rxjs";
 import {UserDetailsService} from "../../services/user-details.service";
 import {TempUserInfoService} from "../../services/temp-user-info.service";
 import {UserDetails} from "../../models/models";
+import {LikesService} from "../../services/likes.service";
 
 @Component({
   selector: 'app-login',
@@ -22,7 +23,7 @@ export class LoginComponent implements OnInit {
     userInfo:UserDetails|null;
     loginF!:FormGroup;
     loginSub: Subscription;
-  constructor(private as:AuthService, private router:Router, private store: Store, private http: HttpService, private detailsSrv: UserDetailsService, private userInfoSrv: TempUserInfoService ) { }
+  constructor(private as:AuthService,private likeSrv: LikesService, private router:Router, private store: Store, private http: HttpService, private detailsSrv: UserDetailsService, private userInfoSrv: TempUserInfoService ) { }
 
   ngOnInit(): void {
   this.loginForm= new FormGroup({
@@ -49,19 +50,22 @@ export class LoginComponent implements OnInit {
 
    this.loginSub= this.as.login(value).pipe(
       concatMap(res=>zip(
-          this.http.get(urlGetLikesByLiker+`/${res.username}`),
+          this.likeSrv.getLikesByLiker(res.username),
+          this.likeSrv.getLikesByLiked(res.username),
           this.detailsSrv.postUserDetails(this.userInfo)
-        )
-        ))
+        )))
       .subscribe((res)=>{
-        this.loadLikesInStore(res[0]);
+        this.loadLikesInStore(res[0], res[1]);
+        console.log("given likes: ", res[0]);
+        console.log("received likes: ", res[1]);
         this.router.navigate(['/user']);
     })
 
   }
 
-  loadLikesInStore(likes: string[]){
-    this.store.dispatch(likesAPI.loaduserlikes({likes:likes}));
+  loadLikesInStore(givenLikes: string[], receivedLikes:string[]){
+    this.store.dispatch(likesAPI.loaduserlikes({likes:givenLikes}));
+    this.store.dispatch(likesAPI.loadreceivedlikes({likes: receivedLikes}));
   }
 
   ngOnDestroy(){

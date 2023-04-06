@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpService} from "./http.service";
 import {Like} from "../models/likes&chat";
-import {urlGetLikesByLiker, urlPostLike} from "../../environments/environment";
+import {urlGetLikesByLiked, urlGetLikesByLiker, urlPostLike} from "../../environments/environment";
 import {AuthService} from "../auth/auth.service";
 import {concat, Observable} from "rxjs";
 
@@ -22,6 +22,13 @@ export class LikesService {
       time: (new Date()).toISOString()
     }
     return this.httpSrv.post(urlPostLike, like);
+  }
+
+  getLikesByLiker(username:string):Observable<string[]>{
+    return this.httpSrv.get<string[]>(urlGetLikesByLiker+`/${username}`)
+  }
+  getLikesByLiked(username:string): Observable<string[]>{
+    return this.httpSrv.get<string[]>(urlGetLikesByLiked+ `/${username}`);
   }
 
 }

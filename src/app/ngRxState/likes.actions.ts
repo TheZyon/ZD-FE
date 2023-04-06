@@ -10,7 +10,8 @@ export const likeActions = createActionGroup({
 export const likesAPI=createActionGroup({
   source:'likesApi',
   events:{
-    'loadUserLikes': props<{ likes: string[] }>()
+    'loadUserLikes': props<{ likes: string[] }>(),
+    'loadReceivedLikes': props<{ likes: string[] }>()
   }
 })
 

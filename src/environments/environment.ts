@@ -13,10 +13,12 @@ export const urlLogIn= urlBaseBE+"/api/auth/login";
 
 export const urlUserDetails = urlBaseBE + "/api/details";
 export const urlAllUserDetails= urlUserDetails+"/all"; //aggiungere pagina
-export const urlUserDetailsByUsername= urlUserDetails + "/username"; //aggiungere username
+export const urlUserDetailsByUsername= urlUserDetails + "/username"; //aggiungere /{username}
 
-export const urlGetLikesByLiker=urlBaseBE+ "/api/likes/byUsernameLiker"; //aggiungere username
+export const urlGetLikesByLiker=urlBaseBE+ "/api/likes/byUsernameLiker"; //aggiungere /{username}
+export const urlGetLikesByLiked= urlBaseBE + "/api/likes/byUsernameLiked"; //aggiungere /{username}
 export const urlPostLike= urlBaseBE + "/api/likes";
+
 export const USERNAME_TOKEN = new InjectionToken<string| null>('token containing logged user username');
 /*
  * For easier debugging in development mode, you can import the following file

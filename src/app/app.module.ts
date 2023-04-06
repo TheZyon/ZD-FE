@@ -13,11 +13,9 @@ import {UserProfileModule} from "./user-profile/user-profile.module";
 import {StoreModule} from '@ngrx/store';
 import {userDetailsReducer} from "./ngRxState/user-details.reducer";
 import { UserPageComponent } from './components/user-page/user-page.component';
-import {likesReducer} from "./ngRxState/likes.reducer";
-import {USERNAME_TOKEN} from "../environments/environment";
-import {AuthService} from "./auth/auth.service";
-import {map} from "rxjs/operators";
-import {forkJoin} from "rxjs";
+import {sentLikesReducer} from "./ngRxState/sentLikesReducer";
+import {receivedLikesReducer} from "./ngRxState/received-likes.reducer";
+
 
 
 /* function loggedUserUsername(_: AuthService) { //TODO: verificare
@@ -41,7 +39,7 @@ import {forkJoin} from "rxjs";
         FormsModule,
         ReactiveFormsModule,
         UserProfileModule,
-        StoreModule.forRoot({usersDetails: userDetailsReducer, likes: likesReducer})
+        StoreModule.forRoot({usersDetails: userDetailsReducer, likes: sentLikesReducer, receivedLikes:receivedLikesReducer})
     ],
     providers: [
       // {provide: USERNAME_TOKEN, useFactory: loggedUserUsername, deps:[AuthService]}
