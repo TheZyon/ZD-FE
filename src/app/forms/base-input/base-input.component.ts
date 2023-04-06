@@ -34,7 +34,7 @@ export class BaseInputComponent <T=string, C=string> implements ControlValueAcce
     else{
       let v=this.toExternalFormat(value);
       this._onChange(v);
-      console.log("valore formattato: ", v);
+      // console.log("valore formattato: ", v);
     }
     this._onTouched();
   }

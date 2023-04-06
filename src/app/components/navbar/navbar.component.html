@@ -9,12 +9,12 @@
                 <a class="nav-link" [routerLink]="['/login']" routerLinkActive="active">Login</a>
                </li>
                <li class="nav-item" *ngIf="!isLoggedIn">
-                <a class="nav-link" [routerLink]="['/signup']" routerLinkActive="active">Signup</a>
+                <a class="nav-link" [routerLink]="['/userUtils/form']" routerLinkActive="active">Signup</a>
                </li>
 
               <!-- se user loggato-->
               <li class="nav-item" *ngIf="isLoggedIn">
-                <a class="nav-link" [routerLink]="['/userPage']" routerLinkActive="active" (click)="detailsSrv.inLoggedUserPage()">Profilo</a>
+                <a class="nav-link" [routerLink]="['/user']" routerLinkActive="active" (click)="detailsSrv.inLoggedUserPage()">Profilo</a> <!--TODO: verificare cosa succede togliendo i click-->
               </li>
               <li class="nav-item" *ngIf="isLoggedIn">
                 <a class="nav-link" [routerLink]="['/users']" routerLinkActive="active" (click)="detailsSrv.notInLoggedUserPage()">Users</a>

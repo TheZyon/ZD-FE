@@ -37,18 +37,19 @@ export interface UserDetails{
   dogAge:number,
   dogSex:DogSex,
   dogWeight: number,
+  description:string,
   idComune:number
 }
 /*
- private Long idUser;
-    private String dogName;
-    private String breed;
-    private int dogAge;
-    @Enumerated(EnumType.STRING)
-    private Sex dogSex;
-    private int dogWeight;
-    private long idComune;
-* */
+private String username;
+private String dogName;
+private String breed;
+private int dogAge;
+@Enumerated(EnumType.STRING)
+private Sex dogSex;
+private int dogWeight;
+private String description;
+private long idComune;*/
 export enum DogSex {"M", "F"}
 
 export const demoDetails:UserDetails={
@@ -58,5 +59,6 @@ export const demoDetails:UserDetails={
   dogAge:99,
   dogSex:DogSex.F,
   dogWeight: 44,
+  description:'cane sonato come pochi, laureato in arti della fuga dopo la pisciata, gran maestro delle erbette del parco',
   idComune:99
 }

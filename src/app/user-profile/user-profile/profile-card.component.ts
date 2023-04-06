@@ -17,10 +17,10 @@ export class ProfileCard{
   constructor() {}
   @Input() isOfLoggedUser: boolean=true;
   @Input() userDetails: UserDetails;
-
   @Output() nextEvent= new EventEmitter<string>();
   @Output() likeEvent= new EventEmitter<string>();
 
+  tempNoDescriptionPlaceholder= "this user has not posted a description yet!!"
   next(){
     this.nextEvent.emit(this.userDetails.username);
   }

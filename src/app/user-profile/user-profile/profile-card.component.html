@@ -7,8 +7,7 @@
       <h3>{{userDetails.dogName}}</h3>
       <h6>{{userDetails.dogAge}} yo, {{userDetails.breed}}...the owner is {{userDetails.username}}!</h6>
       <p>
-        Cane sonato come pochi, passa le sue giornate a guardare nel vuoto meditabondo;
-        probabile reincarnazione del Dio cane con la Cuccia.
+        {{userDetails.description ? userDetails.description : tempNoDescriptionPlaceholder}}
       </p>
 
     </div>

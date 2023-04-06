@@ -16,7 +16,7 @@ const routes: Routes = [
     }
   },
   {
-    path:'userPage',
+    path:'user',
     component:UserPageComponent,
     canActivate:[AuthGuard]
   },
@@ -29,6 +29,10 @@ const routes: Routes = [
     path:'notifications',
     loadChildren: ()=>{return import('src/app/notifications/notifications.module').then((m)=>{return m.NotificationsModule})},
     canActivate: [AuthGuard]
+  },
+  {
+    path: 'userUtils',
+    loadChildren: ()=>{return import('src/app/user-profile/user-profile.module').then((m)=>{return m.UserProfileModule})}
   }
 ];
 

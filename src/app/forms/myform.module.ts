@@ -5,6 +5,7 @@ import { InputStringComponent } from './base-input/input-string/input-string.com
 import { SelectComponent } from './base-input/select/select.component';
 import { PasswordComponent } from './base-input/password/password.component';
 import { EmailComponent } from './base-input/email/email.component';
+import { TextAreaComponent } from './base-input/text-area/text-area.component';
 
 
 @NgModule({
@@ -12,15 +13,17 @@ import { EmailComponent } from './base-input/email/email.component';
     InputStringComponent,
     SelectComponent,
     PasswordComponent,
-    EmailComponent
-  ],
-  exports: [
-    SelectComponent,
-    InputStringComponent,
-    SelectComponent,
     EmailComponent,
-    PasswordComponent
+    TextAreaComponent
   ],
+    exports: [
+        SelectComponent,
+        InputStringComponent,
+        SelectComponent,
+        EmailComponent,
+        PasswordComponent,
+        TextAreaComponent
+    ],
   imports: [
     CommonModule,
     ReactiveFormsModule,

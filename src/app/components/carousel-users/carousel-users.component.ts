@@ -3,6 +3,7 @@ import {UserDetailsService} from "../../services/user-details.service";
 import {demoDetails, UserDetails} from "../../models/models";
 import {Observable, Subscription} from "rxjs";
 import {
+  likedUsersDetails,
   loggedUserDetails,
   notAlreadyLikedUsersDetails,
   usersDetailsFeatureSelector
@@ -33,15 +34,16 @@ export class CarouselUsersComponent implements OnInit, OnDestroy{
   }
 
   ngOnInit(): void {
+
    this.detailsSub=this.details$.subscribe(res=>{
       this.details=res;
       console.log(" utenti non ancora likeati: ", res);
+      if(this.details.length==0) this.thereAreNoMoreUsers=true;
     })
     this.tempLikesSub=this.likes$.subscribe(res=>{
     console.log("likes of this user are: ", res);
     this.tempLikes=res;
     })
-
   }
   ngOnDestroy(){
     this.detailsSub.unsubscribe();

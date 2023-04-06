@@ -6,7 +6,10 @@ import {Store} from "@ngrx/store";
 import {likesAPI} from "../../ngRxState/likes.actions";
 import {HttpService} from "../../services/http.service";
 import {urlGetLikesByLiker, USERNAME_TOKEN} from "../../../environments/environment";
-import {concatMap} from "rxjs";
+import {concatMap, Subscription, zip} from "rxjs";
+import {UserDetailsService} from "../../services/user-details.service";
+import {TempUserInfoService} from "../../services/temp-user-info.service";
+import {UserDetails} from "../../models/models";
 
 @Component({
   selector: 'app-login',
@@ -16,15 +19,20 @@ import {concatMap} from "rxjs";
 export class LoginComponent implements OnInit {
 
     loginForm!:FormGroup;
-
+    userInfo:UserDetails|null;
     loginF!:FormGroup;
-  constructor(private as:AuthService, private router:Router, private store: Store, private http: HttpService) { }
+    loginSub: Subscription;
+  constructor(private as:AuthService, private router:Router, private store: Store, private http: HttpService, private detailsSrv: UserDetailsService, private userInfoSrv: TempUserInfoService ) { }
 
   ngOnInit(): void {
   this.loginForm= new FormGroup({
       username: new FormControl(null, Validators.required),
       password: new FormControl(null, Validators.required)
   })
+    this.userInfoSrv.userInfo$.subscribe(res=>{ //sottorcrizione per prendere le info user--> res è non null solo dopo avvenuto signup
+    this.userInfo=res;
+    console.log("user info ricevute al livello del login: ", res);
+    })
 
   }
 
@@ -39,10 +47,15 @@ export class LoginComponent implements OnInit {
       }
 
 
-    this.as.login(value).pipe(concatMap(res=> this.http.get(urlGetLikesByLiker+`/${res.username}`)))
+   this.loginSub= this.as.login(value).pipe(
+      concatMap(res=>zip(
+          this.http.get(urlGetLikesByLiker+`/${res.username}`),
+          this.detailsSrv.postUserDetails(this.userInfo)
+        )
+        ))
       .subscribe((res)=>{
-        this.loadLikesInStore(res);
-        this.router.navigate(['/userPage']);
+        this.loadLikesInStore(res[0]);
+        this.router.navigate(['/user']);
     })
 
   }
@@ -51,5 +64,8 @@ export class LoginComponent implements OnInit {
     this.store.dispatch(likesAPI.loaduserlikes({likes:likes}));
   }
 
+  ngOnDestroy(){
+    if(this.loginSub) this.loginSub.unsubscribe();
+  }
 
 }
