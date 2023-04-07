@@ -6,7 +6,7 @@ import {Store} from "@ngrx/store";
 import {likesAPI} from "../../ngRxState/likes.actions";
 import {HttpService} from "../../services/http.service";
 import {urlAllUserDetails, urlGetLikesByLiker, USERNAME_TOKEN} from "../../../environments/environment";
-import {concatMap, Subscription, zip} from "rxjs";
+import {concatMap, of, Subscription, zip} from "rxjs";
 import {UserDetailsService} from "../../services/user-details.service";
 import {TempUserInfoService} from "../../services/temp-user-info.service";
 import {UserDetails} from "../../models/models";
@@ -36,14 +36,12 @@ export class LoginComponent implements OnInit {
     this.userInfo=res;
     console.log("user info ricevute al livello del login: ", res);
     })
-
   }
 
   /*
   * al login recupero dal BE i likes dello user
   * */
   login(){
-
       let value={
           username: this.loginForm.controls["username"].value,
           password: this.loginForm.controls['password'].value
@@ -54,17 +52,18 @@ export class LoginComponent implements OnInit {
       concatMap(res=>zip(
           this.likeSrv.getLikesByLiker(res.username),
           this.likeSrv.getLikesByLiked(res.username),
-          this.detailsSrv.postUserDetails(this.userInfo),
-          this.detailsSrv.getAllUsersDetails() // gestire paginazione in caso
-
-        )))
+          this.detailsSrv.postUserDetails(this.userInfo))),
+          concatMap(res=> zip(
+              of(res),
+              this.detailsSrv.getAllUsersDetails() // gestire paginazione in caso
+            )))
       .subscribe((res)=>{
-        this.loadLikesInStore(res[0], res[1]);
-        console.log("given likes: ", res[0]);
-        console.log("received likes: ", res[1]);
-        console.log("all users details: ", res[3].content); //attenzione viene ricevuta dal BE una page quindi bisogna estrarre il content
-        console.log("response del BE al login: ", res[2]);
-        this.store.dispatch(userDetailsAPIActions.retrievealluserdetails({details: res[3].content}));
+        this.loadLikesInStore(res[0][0], res[0][1]);
+        console.log("given likes: ", res[0][0]);
+        console.log("received likes: ", res[0][1]);
+        console.log("all users details: ", res[1].content); //attenzione viene ricevuta dal BE una page quindi bisogna estrarre il content
+        console.log("response del BE al login: ", res[0][2]);
+        this.store.dispatch(userDetailsAPIActions.retrievealluserdetails({details: res[1].content}));
         this.router.navigate(['/user']);
     })
 

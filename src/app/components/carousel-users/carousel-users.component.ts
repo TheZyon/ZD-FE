@@ -63,7 +63,6 @@ export class CarouselUsersComponent implements OnInit, OnDestroy{
     * creates a like (botyh in the BE and in the Store) with the user with username */
   like(username:any){
 
-
     let unameLoggedUser= JSON.parse(localStorage.getItem('user')).username; //take username of logged user
 
     this.likesSrv.createLike(unameLoggedUser, username).subscribe(res=>{ //create like in the BE

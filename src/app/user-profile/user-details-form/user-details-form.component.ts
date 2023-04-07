@@ -123,11 +123,6 @@ export class UserDetailsFormComponent implements OnInit, OnDestroy{
       this.router.navigate(['/signup'])
     }
 
-    /*this.detailsSrv.postUserDetails(userDetails).subscribe(res=>{
-    console.log("response: ",res);
-    this.router.navigate(['/userDetails']);
-    });*/
-
     //TODO: completare creazione userDetails
 
 
