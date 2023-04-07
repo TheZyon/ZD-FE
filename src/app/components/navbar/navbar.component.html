@@ -14,10 +14,10 @@
 
               <!-- se user loggato-->
               <li class="nav-item" *ngIf="isLoggedIn">
-                <a class="nav-link" [routerLink]="['/user']" routerLinkActive="active" (click)="detailsSrv.inLoggedUserPage()">Profilo</a> <!--TODO: verificare cosa succede togliendo i click-->
+                <a class="nav-link" [routerLink]="['/user']" routerLinkActive="active">Profilo</a>
               </li>
               <li class="nav-item" *ngIf="isLoggedIn">
-                <a class="nav-link" [routerLink]="['/users']" routerLinkActive="active" (click)="detailsSrv.notInLoggedUserPage()">Users</a>
+                <a class="nav-link" [routerLink]="['/users']" routerLinkActive="active" >Users</a>
               </li>
               <li class="nav-item" *ngIf="isLoggedIn">
                 <a class="nav-link" [routerLink]="['/notifications']" routerLinkActive="active">Notifications</a>

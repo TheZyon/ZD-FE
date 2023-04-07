@@ -8,16 +8,23 @@ export const environment = {
   production: false
 };
 export const urlBaseBE="http://localhost:9000";
+
+//auth
 export const urlSignUp=urlBaseBE+"/api/auth/signup";
 export const urlLogIn= urlBaseBE+"/api/auth/login";
 
+//user details
 export const urlUserDetails = urlBaseBE + "/api/details";
 export const urlAllUserDetails= urlUserDetails+"/all"; //aggiungere pagina
 export const urlUserDetailsByUsername= urlUserDetails + "/username"; //aggiungere /{username}
 
+//likes
 export const urlGetLikesByLiker=urlBaseBE+ "/api/likes/byUsernameLiker"; //aggiungere /{username}
 export const urlGetLikesByLiked= urlBaseBE + "/api/likes/byUsernameLiked"; //aggiungere /{username}
 export const urlPostLike= urlBaseBE + "/api/likes";
+
+//notifications
+export const urlNotifications= urlBaseBE + "/api/notifications";
 
 export const USERNAME_TOKEN = new InjectionToken<string| null>('token containing logged user username');
 /*

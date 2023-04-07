@@ -18,10 +18,6 @@ import {receivedLikesReducer} from "./ngRxState/received-likes.reducer";
 
 
 
-/* function loggedUserUsername(_: AuthService) { //TODO: verificare
-  return _.username$.toPromise();
- }*/
-
 
 @NgModule({
     declarations: [

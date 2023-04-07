@@ -23,7 +23,6 @@ export class SignupComponent implements OnInit, OnDestroy {
   constructor(private as:AuthService, private r : Router, private userInfoSrv: TempUserInfoService, private detailsSrv: UserDetailsService) { }
 
   ngOnInit(): void {
-  //TODO: testare ricezione di user info in Signup component
       this.userInfoSub=this.userInfoSrv.userInfo$.subscribe(res=>{
       this.userInfo=res;
       console.log("in signup ricevute info: ", this.userInfo);

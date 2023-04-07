@@ -19,7 +19,6 @@ import {userDetailsAPIActions} from "../../ngRxState/userDetailsAPIActions";
 export class UserDetailsFormComponent implements OnInit, OnDestroy{
 
 
-  //  creato nella branch di test
   isLoggedIn: boolean=false;
 
   isLoggedInAndLoggedDetailsSub: Subscription;
@@ -103,7 +102,7 @@ export class UserDetailsFormComponent implements OnInit, OnDestroy{
       breed:this.detailsForm.controls['breed'].value,
       dogAge:this.detailsForm.controls['dogAge'].value,
       dogSex: this.detailsForm.controls['sexSelect'].value,
-      dogWeight: 99,
+      dogWeight: this.detailsForm.controls['dogWeight'].value,
       description: this.detailsForm.controls['description'].value,
       idComune: 999
     }
@@ -125,7 +124,6 @@ export class UserDetailsFormComponent implements OnInit, OnDestroy{
       this.router.navigate(['/signup'])
     }
 
-    //TODO: completare creazione userDetails
 
 
   }
