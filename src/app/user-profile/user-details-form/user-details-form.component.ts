@@ -18,7 +18,7 @@ import {userDetailsAPIActions} from "../../ngRxState/userDetailsAPIActions";
 })
 export class UserDetailsFormComponent implements OnInit, OnDestroy{
 
-
+  //  creato nella branch di test
   isLoggedIn: boolean=false;
 
   isLoggedInAndLoggedDetailsSub: Subscription;
