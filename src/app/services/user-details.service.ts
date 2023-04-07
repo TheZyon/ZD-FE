@@ -43,4 +43,10 @@ export class UserDetailsService {
       console.log("postUserDetails non ha ricevuto parametri e non ha postato nulla!")
       return of(1);}//placeholder observable per usare zip in login.component.ts
   }
+
+
+  //TODO: attenzione gestire pagine
+  getAllUsersDetails(){
+    return this.httpSrv.get(urlAllUserDetails+"/0");
+  }
 }

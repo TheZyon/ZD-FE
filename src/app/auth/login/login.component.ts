@@ -5,12 +5,13 @@ import { Router } from '@angular/router';
 import {Store} from "@ngrx/store";
 import {likesAPI} from "../../ngRxState/likes.actions";
 import {HttpService} from "../../services/http.service";
-import {urlGetLikesByLiker, USERNAME_TOKEN} from "../../../environments/environment";
+import {urlAllUserDetails, urlGetLikesByLiker, USERNAME_TOKEN} from "../../../environments/environment";
 import {concatMap, Subscription, zip} from "rxjs";
 import {UserDetailsService} from "../../services/user-details.service";
 import {TempUserInfoService} from "../../services/temp-user-info.service";
 import {UserDetails} from "../../models/models";
 import {LikesService} from "../../services/likes.service";
+import {userDetailsAPIActions} from "../../ngRxState/userDetailsAPIActions";
 
 @Component({
   selector: 'app-login',
@@ -23,6 +24,7 @@ export class LoginComponent implements OnInit {
     userInfo:UserDetails|null;
     loginF!:FormGroup;
     loginSub: Subscription;
+    userInfoSub:Subscription;
   constructor(private as:AuthService,private likeSrv: LikesService, private router:Router, private store: Store, private http: HttpService, private detailsSrv: UserDetailsService, private userInfoSrv: TempUserInfoService ) { }
 
   ngOnInit(): void {
@@ -30,7 +32,7 @@ export class LoginComponent implements OnInit {
       username: new FormControl(null, Validators.required),
       password: new FormControl(null, Validators.required)
   })
-    this.userInfoSrv.userInfo$.subscribe(res=>{ //sottorcrizione per prendere le info user--> res è non null solo dopo avvenuto signup
+    this.userInfoSub=this.userInfoSrv.userInfo$.subscribe(res=>{ //sottorcrizione per prendere le info user--> res è non null solo dopo avvenuto signup
     this.userInfo=res;
     console.log("user info ricevute al livello del login: ", res);
     })
@@ -52,15 +54,22 @@ export class LoginComponent implements OnInit {
       concatMap(res=>zip(
           this.likeSrv.getLikesByLiker(res.username),
           this.likeSrv.getLikesByLiked(res.username),
-          this.detailsSrv.postUserDetails(this.userInfo)
+          this.detailsSrv.postUserDetails(this.userInfo),
+          this.detailsSrv.getAllUsersDetails() // gestire paginazione in caso
+
         )))
       .subscribe((res)=>{
         this.loadLikesInStore(res[0], res[1]);
         console.log("given likes: ", res[0]);
         console.log("received likes: ", res[1]);
+        console.log("all users details: ", res[3].content); //attenzione viene ricevuta dal BE una page quindi bisogna estrarre il content
+        console.log("response del BE al login: ", res[2]);
+        this.store.dispatch(userDetailsAPIActions.retrievealluserdetails({details: res[3].content}));
         this.router.navigate(['/user']);
     })
 
+
+    /*this.store.dispatch(userDetailsActions.retrievealluserdetails({details: res.content}));*/
   }
 
   loadLikesInStore(givenLikes: string[], receivedLikes:string[]){
@@ -70,6 +79,7 @@ export class LoginComponent implements OnInit {
 
   ngOnDestroy(){
     if(this.loginSub) this.loginSub.unsubscribe();
+    if(this.userInfoSub)this.userInfoSub.unsubscribe();
   }
 
 }

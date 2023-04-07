@@ -12,18 +12,16 @@ import {reciprocalLikesSelector} from "../../ngRxState/likes.selectors";
 })
 export class UserPageComponent implements OnInit, OnDestroy{
 
-
   details: UserDetails;
-  details$: Observable<UserDetails>=this.store.select(loggedUserDetails); //obs che streamma i userDetails dello user loggato
-  private detailsSub: Subscription;
+  loggedUserDetails$: Observable<UserDetails>=this.store.select(loggedUserDetails); //obs che streamma i userDetails dello user loggato
+  private loggedUserDetailSub: Subscription;
   tempReciprocalLikes$: Observable<string[]>= this.store.select(reciprocalLikesSelector); //obs che teniamo qui temporaneamente --> mostra i likes reciproci
   reciprocalLikesSub: Subscription;
   constructor(private store: Store) {
   }
 
   ngOnInit(): void {
-    this.detailsSub=this.details$.subscribe(res=>{
-    // console.log("user details seen in user-page: ", res);
+    this.loggedUserDetailSub=this.loggedUserDetails$.subscribe(res=>{
     this.details=res;
     })
     this.reciprocalLikesSub= this.tempReciprocalLikes$.subscribe(res=>{
@@ -32,7 +30,7 @@ export class UserPageComponent implements OnInit, OnDestroy{
   }
 
   ngOnDestroy(): void {
-    this.detailsSub.unsubscribe();
+    this.loggedUserDetailSub.unsubscribe();
     this.reciprocalLikesSub.unsubscribe();
   }
 

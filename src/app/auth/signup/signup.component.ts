@@ -22,19 +22,9 @@ export class SignupComponent implements OnInit, OnDestroy {
 
   constructor(private as:AuthService, private r : Router, private userInfoSrv: TempUserInfoService, private detailsSrv: UserDetailsService) { }
 
-
-    /*
-    *
-    *
-    *
-    *  private String name;
-    private String username;
-    private String email;
-    private String password;
-    private Set<String> roles;*/
   ngOnInit(): void {
   //TODO: testare ricezione di user info in Signup component
-      this.userInfoSrv.userInfo$.subscribe(res=>{
+      this.userInfoSub=this.userInfoSrv.userInfo$.subscribe(res=>{
       this.userInfo=res;
       console.log("in signup ricevute info: ", this.userInfo);
       })
@@ -55,15 +45,15 @@ export class SignupComponent implements OnInit, OnDestroy {
           password: this.signupForm.controls['password'].value,
           roles: ['ROLE_USER', 'ROLE_MODERATOR', 'ROLE_ADMIN']
       }
-      console.log(value);
 
-      this.as.signup(value).subscribe(()=>{
+      this.as.signup(value).subscribe((res)=>{
+        console.log("response del BE al signup: ", res);
           this.r.navigate(["login"])
       })
   }
   ngOnDestroy(): void {
 
-  this.userInfoSub.unsubscribe();
+    if(this.userInfoSub) this.userInfoSub.unsubscribe();
 
   }
 

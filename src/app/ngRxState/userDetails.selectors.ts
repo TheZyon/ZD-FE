@@ -6,13 +6,15 @@ export const usersDetailsFeatureSelector= createFeatureSelector<UserDetails[]>('
 
 export const loggedUserDetails= createSelector( //dettagli dell'utente loggato
   usersDetailsFeatureSelector,
-
-  (details )=>{
+  (details: UserDetails[])=>{
     let username= JSON.parse(localStorage.getItem('user')).username;
-    let detail=details.filter(d =>d.username == username)[0];
-    return detail;
-  }
-  )
+    let res= details.find(det=>det.username==username);
+    console.log("username received in selector: ", username, "details received in selector: ", details, "; output of loggedUserDetails selector: ", res);
+    return res;
+    });
+
+
+
 
 
 export const notAlreadyLikedUsersDetails= createSelector( //dettagli degli utenti non ancora likeati

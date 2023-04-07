@@ -10,7 +10,6 @@ export const reciprocalLikesSelector= createSelector(
     let reciprocalLikesArray:string[]=[];
     likesSent.forEach(likeSent=> {
       if(likesReceived.find(likeReceived=>likeReceived==likeSent)) {
-        console.log("il like con: ", likeSent, " è reciproco!! Può darsi che ti accoppi!");
         reciprocalLikesArray.push(likeSent);
       }
       })

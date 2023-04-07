@@ -8,7 +8,7 @@ import {TempUserInfoService} from "../../services/temp-user-info.service";
 import {concatMap, Subscription, zip} from "rxjs";
 import { Store} from "@ngrx/store";
 import {loggedUserDetails} from "../../ngRxState/userDetails.selectors";
-import {userDetailsActions} from "../../ngRxState/userDetails.actions";
+import {userDetailsAPIActions} from "../../ngRxState/userDetailsAPIActions";
 
 @Component({
   selector: 'app-user-details-form',
@@ -112,7 +112,7 @@ export class UserDetailsFormComponent implements OnInit, OnDestroy{
     if(this.isLoggedIn){//2.
     zip(this.detailsSrv.postUserDetails(newUserDetails)).subscribe( (res)=> {
 
-      this.store.dispatch(userDetailsActions.update({ userDetails: res[0] as UserDetails}))
+      this.store.dispatch(userDetailsAPIActions.update({ userDetails: res[0] as UserDetails}))
       this.router.navigate(['/user'])
     }
     );
