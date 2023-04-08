@@ -30,8 +30,8 @@ export class UserPageComponent implements OnInit, OnDestroy{
   }
 
   ngOnDestroy(): void {
-    this.loggedUserDetailSub.unsubscribe();
-    this.reciprocalLikesSub.unsubscribe();
+    if(this.loggedUserDetailSub) this.loggedUserDetailSub.unsubscribe();
+    if(this.reciprocalLikesSub) this.reciprocalLikesSub.unsubscribe();
   }
 
 }

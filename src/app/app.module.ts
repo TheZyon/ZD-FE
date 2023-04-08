@@ -15,6 +15,7 @@ import {userDetailsReducer} from "./ngRxState/user-details.reducer";
 import { UserPageComponent } from './components/user-page/user-page.component';
 import {sentLikesReducer} from "./ngRxState/sentLikesReducer";
 import {receivedLikesReducer} from "./ngRxState/received-likes.reducer";
+import { NotificationsComponent } from './components/notifications/notifications.component';
 
 
 
@@ -25,7 +26,8 @@ import {receivedLikesReducer} from "./ngRxState/received-likes.reducer";
         NavbarComponent,
         ProvaComponent,
         CarouselUsersComponent,
-        UserPageComponent
+        UserPageComponent,
+        NotificationsComponent
     ],
     imports: [
         BrowserModule,

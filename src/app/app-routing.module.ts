@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './auth/auth.guard';
 import {CarouselUsersComponent} from "./components/carousel-users/carousel-users.component";
 import {UserPageComponent} from "./components/user-page/user-page.component";
+import {NotificationsComponent} from "./components/notifications/notifications.component";
 
 
 const routes: Routes = [
@@ -27,7 +28,7 @@ const routes: Routes = [
   },
   {
     path:'notifications',
-    loadChildren: ()=>{return import('src/app/notifications/notifications.module').then((m)=>{return m.NotificationsModule})},
+    component: NotificationsComponent,
     canActivate: [AuthGuard]
   },
   {

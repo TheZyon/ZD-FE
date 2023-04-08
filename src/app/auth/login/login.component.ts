@@ -56,6 +56,7 @@ export class LoginComponent implements OnInit {
           concatMap(res=> zip(
               of(res),
               this.detailsSrv.getAllUsersDetails() // gestire paginazione in caso
+
             )))
       .subscribe((res)=>{
         this.loadLikesInStore(res[0][0], res[0][1]);

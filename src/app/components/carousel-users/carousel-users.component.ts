@@ -33,6 +33,10 @@ export class CarouselUsersComponent implements OnInit, OnDestroy{
   constructor(private store: Store, private likesSrv: LikesService) {
   }
 
+  /*
+  * 1. subscribe to obs streaming notAlreadyLikedUsersDetails
+  * 2. subscribe to obs streaming received likes ---> this is temporary for debugging
+  * */
   ngOnInit(): void {
 
    this.detailsSub=this.details$.subscribe(res=>{
@@ -45,9 +49,11 @@ export class CarouselUsersComponent implements OnInit, OnDestroy{
     this.tempLikes=res;
     })
   }
+
+  /*unsubscribe from everything*/
   ngOnDestroy(){
-    this.detailsSub.unsubscribe();
-    this.tempLikesSub.unsubscribe();
+    if(this.detailsSub) this.detailsSub.unsubscribe();
+    if(this.tempLikesSub) this.tempLikesSub.unsubscribe();
   }
 
   /*
@@ -60,13 +66,15 @@ export class CarouselUsersComponent implements OnInit, OnDestroy{
     }
 
     /*
-    * creates a like (botyh in the BE and in the Store) with the user with username */
+    *1.creates a like (botyh in the BE and in the Store) with the user with username
+    *2.posts notification to the BE
+    * */
   like(username:any){
 
-    let unameLoggedUser= JSON.parse(localStorage.getItem('user')).username; //take username of logged user
+    let unameLoggedUser= JSON.parse(localStorage.getItem('user')).username;
 
-    this.likesSrv.createLike(unameLoggedUser, username).subscribe(res=>{ //create like in the BE
-    console.log("usernames: ", unameLoggedUser, username, "the response is: ", res);
+    this.likesSrv.postLike(unameLoggedUser, username).subscribe(res=>{ //create like & notification in the BE
+    console.log("the response of the BE at the like is: ", res);
     });
 
     this.store.dispatch(likeActions.like({usernameLiked: username})) //create like in the Store

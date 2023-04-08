@@ -14,6 +14,6 @@
   </div>
 
   <button type="button" class="btn btn-success" *ngIf="!isOfLoggedUser" (click)="like()">like</button> <!--lancia likeEvent al padre-->
-  <button type="button" class="btn btn-danger" *ngIf="!isOfLoggedUser" (click)="next()" >manda fanculo</button><!--lancia nextEvent al padre-->
-  <button type="button" class="btn btn-primary" (click)="printUsernames() ">print usernames</button>
+  <button type="button" class="btn btn-danger" *ngIf="!isOfLoggedUser" (click)="next()">skippa</button><!--lancia nextEvent al padre-->
+  <button type="button" class="btn btn-primary" (click)="printUsernames()">print usernames</button>
 </div>

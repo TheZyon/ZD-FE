@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpService} from "./http.service";
-import {Like} from "../models/likes&chat";
-import {urlNotifications, urlPostLike} from "../../environments/environment";
+import {urlNotifications} from "../../environments/environment";
 import {Notification} from "../models/notification";
 
 @Injectable({
@@ -18,10 +17,16 @@ export class NotificationsService {
     let notification:Notification={
       username:username,
       payload:payload,
+      visualized: false,
       date: (new Date()).toISOString()
     }
 
     return this.http.post(urlNotifications, notification);
+  }
+
+  /*gets the notifications of the user with username*/
+  getNotificationsByUsername(username:string){
+    return this.http.get(urlNotifications+`/${username}`);
   }
 
 
