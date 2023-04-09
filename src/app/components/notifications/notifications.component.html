@@ -1,20 +1,14 @@
-<p>notifications works!</p>
-
-
+<p>Notifications</p>
 
 <h2 class="mt-4" *ngIf="thereAreNoNotifications"> Evviva non ci sono nuove notifiche! </h2>
 
 
 <ul *ngIf="!thereAreNoNotifications">
   <li *ngFor="let n of notifications; let i = index">
-    <div *ngIf="!n.visualized" class="new-notification">
+    <div [ngClass]="!n.visualized ? 'new-notification': ''"> <!--usare ngClass per modificare la visualizzazione della notifica se è visualized-->
       {{i+1}} - {{n.payload}} <span class="new-notification" *ngIf="!n.visualized">NEW!!</span>
     </div>
-    <div *ngIf="n.visualized">
-    {{i+1}} - {{n.payload}}
-    </div>
   </li>
-
   <button type="button" class="btn btn-success" (click)="deleteAllNotifications()">delete all notifications</button>
 </ul>
 

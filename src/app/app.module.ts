@@ -17,6 +17,7 @@ import {sentLikesReducer} from "./ngRxState/sentLikesReducer";
 import {receivedLikesReducer} from "./ngRxState/received-likes.reducer";
 import { NotificationsComponent } from './components/notifications/notifications.component';
 import {notificationsReducer} from "./ngRxState/notifications.reducer";
+import { CrushesComponent } from './components/crushes/crushes.component';
 
 
 
@@ -29,7 +30,8 @@ import {notificationsReducer} from "./ngRxState/notifications.reducer";
         ProvaComponent,
         CarouselUsersComponent,
         UserPageComponent,
-        NotificationsComponent
+        NotificationsComponent,
+        CrushesComponent
     ],
     imports: [
         BrowserModule,
