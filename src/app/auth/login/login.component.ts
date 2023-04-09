@@ -12,6 +12,8 @@ import {TempUserInfoService} from "../../services/temp-user-info.service";
 import {UserDetails} from "../../models/models";
 import {LikesService} from "../../services/likes.service";
 import {userDetailsAPIActions} from "../../ngRxState/userDetailsAPIActions";
+import {NotificationsService} from "../../services/notifications.service";
+import {notificationsActions} from "../../ngRxState/notifications.actions";
 
 @Component({
   selector: 'app-login',
@@ -25,7 +27,7 @@ export class LoginComponent implements OnInit {
     loginF!:FormGroup;
     loginSub: Subscription;
     userInfoSub:Subscription;
-  constructor(private as:AuthService,private likeSrv: LikesService, private router:Router, private store: Store, private http: HttpService, private detailsSrv: UserDetailsService, private userInfoSrv: TempUserInfoService ) { }
+  constructor(private as:AuthService,private notificSrv: NotificationsService, private likeSrv: LikesService, private router:Router, private store: Store, private http: HttpService, private detailsSrv: UserDetailsService, private userInfoSrv: TempUserInfoService ) { }
 
   ngOnInit(): void {
   this.loginForm= new FormGroup({
@@ -52,19 +54,21 @@ export class LoginComponent implements OnInit {
       concatMap(res=>zip(
           this.likeSrv.getLikesByLiker(res.username),
           this.likeSrv.getLikesByLiked(res.username),
+          this.notificSrv.getNotificationsByUsername(res.username),
           this.detailsSrv.postUserDetails(this.userInfo))),
           concatMap(res=> zip(
               of(res),
               this.detailsSrv.getAllUsersDetails() // gestire paginazione in caso
-
             )))
       .subscribe((res)=>{
         this.loadLikesInStore(res[0][0], res[0][1]);
         console.log("given likes: ", res[0][0]);
         console.log("received likes: ", res[0][1]);
+        console.log("received notifications: ", res[0][2]);
         console.log("all users details: ", res[1].content); //attenzione viene ricevuta dal BE una page quindi bisogna estrarre il content
-        console.log("response del BE al login: ", res[0][2]);
+        // console.log("response del BE al postUserDetails: ", res[0][3]);
         this.store.dispatch(userDetailsAPIActions.retrievealluserdetails({details: res[1].content}));
+        this.store.dispatch(notificationsActions.getnotificationsbe({notifications: res[0][2]}));
         this.router.navigate(['/user']);
     })
 

@@ -5,7 +5,7 @@
   <div>
     <div class="text-center">
       <h3>{{userDetails.dogName}}</h3>
-      <h6>{{userDetails.dogAge}} yo, {{userDetails.breed}}...the owner is {{userDetails.username}}!</h6>
+      <h6>{{userDetails.dogAge}} yo,{{userDetails.dogSex|sex}} {{userDetails.breed}}...the owner is {{userDetails.username}}!</h6>
       <p>
         {{userDetails.description ? userDetails.description : tempNoDescriptionPlaceholder}}
       </p>

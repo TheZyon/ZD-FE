@@ -16,6 +16,8 @@ import { UserPageComponent } from './components/user-page/user-page.component';
 import {sentLikesReducer} from "./ngRxState/sentLikesReducer";
 import {receivedLikesReducer} from "./ngRxState/received-likes.reducer";
 import { NotificationsComponent } from './components/notifications/notifications.component';
+import {notificationsReducer} from "./ngRxState/notifications.reducer";
+
 
 
 
@@ -37,7 +39,7 @@ import { NotificationsComponent } from './components/notifications/notifications
         FormsModule,
         ReactiveFormsModule,
         UserProfileModule,
-        StoreModule.forRoot({usersDetails: userDetailsReducer, likes: sentLikesReducer, receivedLikes:receivedLikesReducer})
+        StoreModule.forRoot({usersDetails: userDetailsReducer, likes: sentLikesReducer, receivedLikes:receivedLikesReducer, notifications: notificationsReducer})
     ],
     providers: [
       // {provide: USERNAME_TOKEN, useFactory: loggedUserUsername, deps:[AuthService]}

@@ -5,6 +5,7 @@ import {RouterModule, Routes} from "@angular/router";
 import { UserDetailsFormComponent } from './user-details-form/user-details-form.component';
 import {ReactiveFormsModule} from "@angular/forms";
 import {MyformModule} from "../forms/myform.module";
+import {SexPipe} from "../pipes/sex.pipe";
 
 
 const routes: Routes=[
@@ -20,7 +21,8 @@ const routes: Routes=[
 @NgModule({
   declarations: [
     ProfileCard,
-    UserDetailsFormComponent
+    UserDetailsFormComponent,
+    SexPipe
   ],
   exports: [
     ProfileCard

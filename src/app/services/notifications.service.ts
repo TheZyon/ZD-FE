@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import {HttpService} from "./http.service";
 import {urlNotifications} from "../../environments/environment";
 import {Notification} from "../models/notification";
-
 @Injectable({
   providedIn: 'root'
 })
@@ -27,6 +26,10 @@ export class NotificationsService {
   /*gets the notifications of the user with username*/
   getNotificationsByUsername(username:string){
     return this.http.get(urlNotifications+`/${username}`);
+  }
+
+  deleteNotifications(username:string){
+   return this.http.delete(urlNotifications+`/${username}`);
   }
 
 
