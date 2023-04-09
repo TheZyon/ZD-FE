@@ -6,6 +6,7 @@ import { UserDetailsFormComponent } from './user-details-form/user-details-form.
 import {ReactiveFormsModule} from "@angular/forms";
 import {MyformModule} from "../forms/myform.module";
 import {SexPipe} from "../pipes/sex.pipe";
+import { CrushViewComponent } from './crush-view/crush-view.component';
 
 
 const routes: Routes=[
@@ -22,10 +23,12 @@ const routes: Routes=[
   declarations: [
     ProfileCard,
     UserDetailsFormComponent,
-    SexPipe
+    SexPipe,
+    CrushViewComponent
   ],
   exports: [
-    ProfileCard
+    ProfileCard,
+    CrushViewComponent
   ],
   imports: [
     CommonModule,

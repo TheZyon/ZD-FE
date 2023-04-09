@@ -2,7 +2,7 @@
 
 
 <div *ngIf="!thereAreNoMoreUsers">
-  <app-user-card [userDetails]="details[indexCurrentUser]" (nextEvent)="next($event)" (likeEvent)="like($event)" [isOfLoggedUser]="false"></app-user-card>
+  <app-user-card [userDetails]="details[indexCurrentUser]" (nextEvent)="next($event)" (likeEvent)="like($event)" [showLikeBtns]="true"></app-user-card>
 </div>
 
 <div *ngIf="thereAreNoMoreUsers">

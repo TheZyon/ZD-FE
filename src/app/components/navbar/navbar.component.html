@@ -23,7 +23,7 @@
                 <a class="nav-link" [routerLink]="['/notifications']" routerLinkActive="active">Notifications</a>
               </li>
               <li class="nav-item" *ngIf="isLoggedIn">
-                <a class="nav-link" [routerLink]="['/']" routerLinkActive="active">Chat</a>
+                <a class="nav-link" [routerLink]="['/crushes']" routerLinkActive="active">Crushes</a>
               </li>
             </ul>
             <button type="button" class="btn btn-danger" (click)="onLogout()" *ngIf="isLoggedIn">Logout</button>

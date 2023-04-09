@@ -1,6 +1,6 @@
 import{createSelector, createFeatureSelector} from "@ngrx/store";
 import {UserDetails} from "../models/models";
-import {userLikesFeatureSelector} from "./likes.selectors";
+import {reciprocalLikesSelector, userLikesFeatureSelector, userReceivedLikesFeatureSelector} from "./likes.selectors";
 export const usersDetailsFeatureSelector= createFeatureSelector<UserDetails[]>('usersDetails'); //dettagli di tutti gli utenti
 
 
@@ -31,6 +31,13 @@ export const likedUsersDetails= createSelector( //dettagli degli urtenti likeati
   usersDetailsFeatureSelector,
   (usernameLikedUsers, allUsersDetails)=>{
     return allUsersDetails.filter(det=>usernameLikedUsers.includes(det.username));
+  })
+
+export const reciprocalLikesUsersDetails= createSelector(
+  usersDetailsFeatureSelector,
+  reciprocalLikesSelector,
+  (details, reciprocalLikesUnames)=> {
+    return details.filter(det => reciprocalLikesUnames.includes(det.username))
   })
 
 

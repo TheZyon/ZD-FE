@@ -1,6 +1,5 @@
-import {Component, EventEmitter, Input, OnDestroy, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {UserDetails} from "../../models/models";
-import {DogSex} from "../../models/models";
 
 @Component({
   selector: 'app-user-card',
@@ -10,7 +9,7 @@ import {DogSex} from "../../models/models";
 })
 export class ProfileCard{
   constructor() {}
-  @Input() isOfLoggedUser: boolean=true;
+  @Input() showLikeBtns: boolean=false;
   @Input() userDetails: UserDetails;
   @Output() nextEvent= new EventEmitter<string>();
   @Output() likeEvent= new EventEmitter<string>();

@@ -1,6 +1,6 @@
 <div class="container">
   <div>
-    <img height="100px" src="/assets/profiloA.jpg" alt="immagineDemo">
+    <img height="100px" src="/assets/profiloA.jpg" alt="immagineDemo" class="circ">
   </div>
   <div>
     <div class="text-center">
@@ -13,7 +13,7 @@
     </div>
   </div>
 
-  <button type="button" class="btn btn-success" *ngIf="!isOfLoggedUser" (click)="like()">like</button> <!--lancia likeEvent al padre-->
-  <button type="button" class="btn btn-danger" *ngIf="!isOfLoggedUser" (click)="next()">skippa</button><!--lancia nextEvent al padre-->
+  <button type="button" class="btn btn-success" *ngIf="showLikeBtns" (click)="like()">like</button> <!--lancia likeEvent al padre-->
+  <button type="button" class="btn btn-danger" *ngIf="showLikeBtns" (click)="next()">skippa</button><!--lancia nextEvent al padre-->
   <button type="button" class="btn btn-primary" (click)="printUsernames()">print usernames</button>
 </div>

@@ -4,6 +4,8 @@ import { AuthGuard } from './auth/auth.guard';
 import {CarouselUsersComponent} from "./components/carousel-users/carousel-users.component";
 import {UserPageComponent} from "./components/user-page/user-page.component";
 import {NotificationsComponent} from "./components/notifications/notifications.component";
+import {CrushesComponent} from "./components/crushes/crushes.component";
+import {CrushSnapshotComponent} from "./components/crush-snapshot/crush-snapshot.component";
 
 
 const routes: Routes = [
@@ -30,6 +32,16 @@ const routes: Routes = [
     path:'notifications',
     component: NotificationsComponent,
     canActivate: [AuthGuard]
+  },
+  {
+    path:'crushes',
+    component: CrushesComponent,
+    canActivate:[AuthGuard]
+  },
+  {
+    path:'crush',
+    component: CrushSnapshotComponent,
+    canActivate:[AuthGuard]
   },
   {
     path: 'userUtils',
