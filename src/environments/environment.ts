@@ -26,6 +26,9 @@ export const urlPostLike= urlBaseBE + "/api/likes";
 //notifications
 export const urlNotifications= urlBaseBE + "/api/notifications";
 
+//chat messages
+export const urlChatMessages= urlBaseBE + "/api/chatMessage"; //buono per il post; per il get bisogna aggiungere "/{username1}/{username2}"w
+
 export const USERNAME_TOKEN = new InjectionToken<string| null>('token containing logged user username');
 /*
  * For easier debugging in development mode, you can import the following file
