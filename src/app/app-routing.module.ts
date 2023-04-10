@@ -6,6 +6,7 @@ import {UserPageComponent} from "./components/user-page/user-page.component";
 import {NotificationsComponent} from "./components/notifications/notifications.component";
 import {CrushesComponent} from "./components/crushes/crushes.component";
 import {CrushSnapshotComponent} from "./components/crush-snapshot/crush-snapshot.component";
+import {ChatPageComponent} from "./components/chat-page/chat-page.component";
 
 
 const routes: Routes = [
@@ -41,6 +42,11 @@ const routes: Routes = [
   {
     path:'crush',
     component: CrushSnapshotComponent,
+    canActivate:[AuthGuard]
+  },
+  {
+    path:'chat',
+    component: ChatPageComponent,
     canActivate:[AuthGuard]
   },
   {

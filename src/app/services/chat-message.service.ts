@@ -16,8 +16,16 @@ export class ChatMessageService {
 
 
   //POST
-  postChatMessage(message: ChatMessage){
-    return this.http.post(urlChatMessages, message);
+  postChatMessage(username1: string, username2: string, message: string){
+
+    let m : ChatMessage = {
+      username1: username1,
+      username2: username2,
+      message: message,
+      time: (new Date()).toISOString()
+    }
+
+    return this.http.post(urlChatMessages, m);
   }
 
 
@@ -34,7 +42,7 @@ export class ChatMessageService {
   * 3. popolamento dell'array
   * 4. ritorno zip degli observables dell'array ---> zip con gli observables delle chiamate per i messaggi per ogni crush
   * */
-  getAllChatMessagesOfUser(username: string){
+ /* getAllChatMessagesOfUser(username: string){
 
     return this.store.select(reciprocalLikesUsersDetails) //1
       .pipe(concatMap(res=>{
@@ -46,7 +54,12 @@ export class ChatMessageService {
         })
         return zip(...obsArray); //4.
     }))
+  }*/ //interessante ma si può semplificare...
+
+  getAllMessagesOfUser(){
+    //TODO: implementare
   }
+
 
 
 }

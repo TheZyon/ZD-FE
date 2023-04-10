@@ -1,1 +1,8 @@
-<p>chat-page works!</p>
+<div class="container">
+  <form [formGroup]="messageInput" (ngSubmit)="sendMessage()">
+
+    <app-text-area label="" formControlName="message"></app-text-area>
+
+    <button type="submit" class="btn btn-primary mt-3" [disabled]="!messageInput.valid">send!</button>
+  </form>
+</div>

@@ -23,6 +23,7 @@ import { CrushSnapshotComponent } from './components/crush-snapshot/crush-snapsh
 import { ChatPageComponent } from './components/chat-page/chat-page.component';
 import { ChatMessageComponent } from './library/chat-message/chat-message.component';
 import {chatMessagesReducer} from "./ngRxState/chat-message.reducer";
+import {MyformModule} from "./forms/myform.module";
 
 
 
@@ -49,7 +50,14 @@ import {chatMessagesReducer} from "./ngRxState/chat-message.reducer";
         FormsModule,
         ReactiveFormsModule,
         UserProfileModule,
-        StoreModule.forRoot({usersDetails: userDetailsReducer, likes: sentLikesReducer, receivedLikes:receivedLikesReducer, notifications: notificationsReducer, chatMessage: chatMessagesReducer})
+        StoreModule.forRoot({
+            usersDetails: userDetailsReducer,
+            likes: sentLikesReducer,
+            receivedLikes: receivedLikesReducer,
+            notifications: notificationsReducer,
+            chatMessage: chatMessagesReducer
+        }),
+        MyformModule
     ],
     providers: [
       // {provide: USERNAME_TOKEN, useFactory: loggedUserUsername, deps:[AuthService]}

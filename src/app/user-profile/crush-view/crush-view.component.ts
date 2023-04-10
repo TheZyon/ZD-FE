@@ -19,7 +19,7 @@ export class CrushViewComponent {
   }
 
   navigateToChatWithCrush(){
-    console.log("da implementare!!");
+   this.router.navigate(['/chat', {infoCrush: JSON.stringify(this.details)}])
   }
 
 }
