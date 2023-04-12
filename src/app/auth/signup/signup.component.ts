@@ -1,10 +1,10 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import { AuthService } from '../auth.service';
-import {FormControl, FormGroup, NgForm, Validators} from '@angular/forms';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 import { Router } from '@angular/router';
 import {TempUserInfoService} from "../../services/temp-user-info.service";
 import {UserDetails} from "../../models/models";
-import {concatMap, Subject, Subscription} from "rxjs";
+import { Subscription} from "rxjs";
 import {UserDetailsService} from "../../services/user-details.service";
 
 @Component({
@@ -36,10 +36,10 @@ export class SignupComponent implements OnInit, OnDestroy {
   }
 
   signup(){
-
+      let username = this.userInfo ? this.userInfo.username : '';
       let value={
           name: this.signupForm.controls['name'].value,
-          username: this.userInfo.username,
+          username: username,
           email: this.signupForm.controls['email'].value,
           password: this.signupForm.controls['password'].value,
           roles: ['ROLE_USER', 'ROLE_MODERATOR', 'ROLE_ADMIN']

@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
 import {HttpService} from "./http.service";
-import {urlAllUserDetails, urlUserDetails, urlUserDetailsByUsername} from "../../environments/environment";
+import {urlAllUserDetails, urlUserDetails} from "../../environments/environment";
 import {Page, UserDetails} from "../models/models";
-import {BehaviorSubject, map, Observable, of, Subject, take} from "rxjs";
-import {AuthService} from "../auth/auth.service";
-import {LikesService} from "./likes.service";
+import {BehaviorSubject, map, Observable, of} from "rxjs";
+
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +21,7 @@ export class UserDetailsService {
   currentUser$ = this.pagesObs.pipe(map(page => page.content[this.userIndex]))
 
 
-  constructor(private httpSrv: HttpService, private authSrv: AuthService, private likeSrv: LikesService) {
+  constructor(private httpSrv: HttpService) {
   }
 
 

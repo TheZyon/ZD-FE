@@ -1,33 +1,15 @@
-import {Injectable, Injector} from '@angular/core';
+import {Injectable} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import {BehaviorSubject, Subject, throwError} from 'rxjs';
-// map sesrve per guardre la risposta del login e vedere se i dati coincidono
+import {BehaviorSubject} from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
-import {urlBaseBE, urlLogIn, urlSignUp, USERNAME_TOKEN} from "../../environments/environment";
-import {UserDetailsService} from "../services/user-details.service";
+import { urlLogIn, urlSignUp} from "../../environments/environment";
 import {errors} from "../../environments/errors";
+import {LoadAndUpdateFromAPIService} from "../services/load-and-update-from-a-p-i.service";
+import {AuthData, LoginData, SignupData} from "../models/auth";
 
-export interface SignupData {
-    name: string;
-    username: string;
-    email: string;
-    password: string;
-    roles:string[];
-}
 
-export interface LoginData {
-    username: string;
-    password: string;
-}
-
-export interface AuthData {
-    accessToken: string;
-
-        username: string
-
-}
 
 @Injectable({
     providedIn: 'root',
@@ -46,7 +28,7 @@ export class AuthService {
 
     autoLogoutTimer: any;
 
-    constructor(private http: HttpClient, private router: Router) {
+    constructor(private http: HttpClient, private router: Router, private loadAPISrv: LoadAndUpdateFromAPIService) {
         console.log(URL);
         this.restoreUser();
 
@@ -106,6 +88,7 @@ export class AuthService {
         this.authSubject.next(null); //segnalare al sito che non siamo più loggati
         this.router.navigate(['/login']);
         localStorage.removeItem('user'); //dimentichiamo il token per evitare autologin
+        this.loadAPISrv.doUnsubscribe();
         if (this.autoLogoutTimer) {
             clearTimeout(this.autoLogoutTimer);
         }
@@ -119,16 +102,4 @@ export class AuthService {
         }, expMs);
     }
 
-
-    // generaErrore() {
-    //     throw new Error("errore")
-    // }
-
-    // test() {
-    //     try{
-    //         this.generaErrore()
-    //     } catch(err) {
-    //         console.log(err);
-    //     }
-    // }
 }

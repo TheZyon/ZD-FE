@@ -5,7 +5,7 @@ import {AuthService} from "../../auth/auth.service";
 import {UserDetailsService} from "../../services/user-details.service";
 import {Router} from "@angular/router";
 import {TempUserInfoService} from "../../services/temp-user-info.service";
-import {concatMap, Subscription, zip} from "rxjs";
+import {concatMap, of, Subscription, zip} from "rxjs";
 import { Store} from "@ngrx/store";
 import {loggedUserDetails} from "../../ngRxState/userDetails.selectors";
 import {userDetailsAPIActions} from "../../ngRxState/userDetailsAPIActions";
@@ -41,12 +41,12 @@ export class UserDetailsFormComponent implements OnInit, OnDestroy{
 
      this.isLoggedInAndLoggedDetailsSub=this.authSrv.isLoggedIn$.pipe(concatMap(islogged=>{
        this.isLoggedIn=islogged;
-       return this.store.select(loggedUserDetails)
+       return this.isLoggedIn ?  this.store.select(loggedUserDetails) : of("a fata user non è loggato");
        }))
        .subscribe(res=>{
          console.log("is logged in? ", this.isLoggedIn, "details of logged user: ", res);
          if(this.isLoggedIn) {
-           this.loggedUserDetails=res;
+           this.loggedUserDetails=res as UserDetails;
 
            this.detailsForm=this.fb.group({
              username: [this.loggedUserDetails.username, Validators.required],

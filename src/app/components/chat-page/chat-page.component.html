@@ -1,4 +1,16 @@
 <div class="container">
+
+  <div class="container" *ngFor="let message of messages; let i = index">
+
+
+    <div [ngClass]="message.username1 == usernameLoggedUser ? 'messULoggato' : 'messCrush'" class="m-4 p-4">
+      <p>{{message.username1}} lo ha spedito in data {{message.time}}-- {{message.username2}} è destinatario</p>
+      <p>{{message.message}}</p>
+    </div>
+
+
+  </div>
+
   <form [formGroup]="messageInput" (ngSubmit)="sendMessage()">
 
     <app-text-area label="" formControlName="message"></app-text-area>

@@ -1,9 +1,9 @@
 import { createActionGroup, props } from '@ngrx/store';
-import {ChatMessage} from "../models/likes&chat";
+import {ChatMessage, ChatUser1User2} from "../models/likes&chat";
 export const chatMessageActions = createActionGroup({
   source: 'login or time interval',
   events: {
-    'loadFromBE': props<{ chatMessagesOfUser: ChatMessage[] }>(),
+    'loadFromBE': props<{ chatMessagesOfUser: ChatUser1User2[] }>(),
     'postChatMessage': props<{ chatMessage: ChatMessage }>()
   }
   });

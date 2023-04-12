@@ -5,6 +5,8 @@ import {ChatMessageService} from "../../services/chat-message.service";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {ActivatedRoute} from "@angular/router";
 import {getUsername} from "../../../environments/environment";
+import {chatWithSpecificUser} from "../../ngRxState/chat-message.selectors";
+import {ChatMessage, ChatUser1User2} from "../../models/likes&chat";
 
 
 @Component({
@@ -14,6 +16,8 @@ import {getUsername} from "../../../environments/environment";
 })
 export class ChatPageComponent implements OnInit, OnDestroy{
 
+
+  messages: ChatMessage[]=[];
 
   crushDet: UserDetails=demoDetails;
   usernameLoggedUser=getUsername();
@@ -26,12 +30,11 @@ export class ChatPageComponent implements OnInit, OnDestroy{
 
   ngOnInit(): void {
   this.crushDet=JSON.parse(this.route.snapshot.paramMap.get('infoCrush'));
+  this.store.select(chatWithSpecificUser(this.crushDet.username)).subscribe(res=>{
+  // console.log("la chat con il crush dovrebbe essere: ", res);
+  this.messages=res.messages;
+  })
 
-  this.chatSrv.getAllMessagesOfUser().subscribe(
-    res=>{
-  console.log("the response of the BE is: ", res);
-  },
-    error => console.log("errore: ", error))
   }
 
   sendMessage(){
