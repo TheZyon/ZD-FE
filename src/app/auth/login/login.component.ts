@@ -42,7 +42,10 @@ export class LoginComponent implements OnInit {
   }
 
   /*
-  * al login recupero dal BE i likes dello user
+  * al login recupero dal BE:
+  *
+  * 1. i likes dello user
+  * 2. le notifiche
   * */
   login(){
       let value={
@@ -54,8 +57,8 @@ export class LoginComponent implements OnInit {
    this.loginSub= this.as.login(value).pipe(
       concatMap(res=>zip(
           this.likeSrv.getLikesByLiker(res.username),
-          this.likeSrv.getLikesByLiked(res.username),
-          this.notificSrv.getNotificationsByUsername(res.username),
+          this.likeSrv.getLikesByLiked(res.username),//1.
+          this.notificSrv.getNotificationsByUsername(res.username), //2.
           this.detailsSrv.postUserDetails(this.userInfo))),
           concatMap(res=> zip(
               of(res),
