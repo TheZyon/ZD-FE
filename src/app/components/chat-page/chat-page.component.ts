@@ -56,6 +56,8 @@ export class ChatPageComponent implements OnInit, OnDestroy{
     })
   }
 
+
+
   ngOnDestroy(): void {
   }
 

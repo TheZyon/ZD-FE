@@ -3,10 +3,7 @@
   <div class="container" *ngFor="let message of messages; let i = index">
 
 
-    <div [ngClass]="message.username1 == usernameLoggedUser ? 'messULoggato' : 'messCrush'" class="m-4 p-4">
-      <p>{{message.username1}} lo ha spedito in data {{message.time | datetime: true}}-- {{message.username2}} è destinatario</p>
-      <p>{{message.message}}</p>
-    </div>
+    <app-chat-message [message]="message" [isOfUser]="message.username1==usernameLoggedUser"></app-chat-message>
 
 
   </div>

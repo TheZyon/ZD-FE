@@ -1,6 +1,8 @@
 
-<div>
-  <p>{{chatMessageDetails.username1}}</p>
-  <hr>
-  <p>{{chatMessageDetails.message}}</p>
+
+
+
+<div [ngClass]="messageTemplateClass()" class="m-4 p-4">
+  <p>{{message.time | datetime: true}}</p>
+  <p>{{message.message}}</p>
 </div>

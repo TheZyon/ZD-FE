@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {ChatMessage} from "../../models/likes&chat";
+import {ChatMessage, ChatUser1User2} from "../../models/likes&chat";
 
 @Component({
   selector: 'app-chat-message',
@@ -8,10 +8,14 @@ import {ChatMessage} from "../../models/likes&chat";
 })
 export class ChatMessageComponent {
 
-  @Input() chatMessageDetails: ChatMessage;
+  @Input() message: ChatMessage;
 
+  @Input() isOfUser: boolean=false;
 
-
+  messageTemplateClass(){
+    if(this.isOfUser) return 'user';
+    return 'crush';
+  }
 
 
 }
