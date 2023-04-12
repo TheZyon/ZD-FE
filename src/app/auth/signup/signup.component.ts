@@ -15,7 +15,7 @@ import {UserDetailsService} from "../../services/user-details.service";
 export class SignupComponent implements OnInit, OnDestroy {
 
 
-
+    errorMsg='';
     signupForm!:FormGroup;
     userInfo: UserDetails;
     userInfoSub: Subscription;
@@ -48,7 +48,8 @@ export class SignupComponent implements OnInit, OnDestroy {
       this.as.signup(value).subscribe((res)=>{
         console.log("response del BE al signup: ", res);
           this.r.navigate(["login"])
-      })
+      },
+        error => this.errorMsg=error.message)
   }
   ngOnDestroy(): void {
 

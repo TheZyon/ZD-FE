@@ -28,8 +28,12 @@ export const urlNotifications= urlBaseBE + "/api/notifications";
 
 //chat messages
 export const urlChatMessages= urlBaseBE + "/api/chatMessage"; //buono per il post; per il get bisogna aggiungere "/{username1}/{username2}"w
-
+export  const urlAllMessagesUser= urlChatMessages+ "/allMessagesUser"; //aggiungere "/{username}"
 export const USERNAME_TOKEN = new InjectionToken<string| null>('token containing logged user username');
+
+export function getUsername():string{
+  return JSON.parse(localStorage.getItem('user')).username;
+}
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.

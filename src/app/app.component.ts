@@ -1,10 +1,8 @@
-import {Component, Inject} from '@angular/core';
+import {Component} from '@angular/core';
 import {Store} from "@ngrx/store";
 import {HttpService} from "./services/http.service";
-import {urlAllUserDetails, USERNAME_TOKEN} from "../environments/environment";
-import {userDetailsAPIActions} from "./ngRxState/userDetailsAPIActions";
+import { urlChatMessages} from "../environments/environment";
 import {loggedUserDetails, usersDetailsFeatureSelector} from "./ngRxState/userDetails.selectors";
-import {zip} from "rxjs";
 
 @Component({
   selector: 'app-root',
@@ -28,25 +26,22 @@ export class AppComponent {
     })*/
   }
 
+  errorMessage='';
   //mostra i userDetails contenuti in Store
   watchUserDetails(){
-    /*zip(
-      this.store.select(loggedUserDetails),
-      this.store.select(usersDetailsFeatureSelector)
-    )
-    .subscribe(res=>{
-    console.log("logged user details: ",res[0]);
-    console.log("all retrieved users details in the store: ",res[1]);
-    })*/
   this.store.select(usersDetailsFeatureSelector).subscribe(res=>{
   console.log("all users details: ", res);
   })
   this.store.select(loggedUserDetails).subscribe(res=>{
   console.log("user details selected: ",res);
   })
-
-
   }
 
+  call(){
+    this.httpSrv.get(urlChatMessages+"/test"). subscribe(res=>{
+    console.log(res);
+    },
+      error => this.errorMessage=error)
+  }
 
 }

@@ -7,6 +7,7 @@ import {BehaviorSubject, Subject, throwError} from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import {urlBaseBE, urlLogIn, urlSignUp, USERNAME_TOKEN} from "../../environments/environment";
 import {UserDetailsService} from "../services/user-details.service";
+import {errors} from "../../environments/errors";
 
 export interface SignupData {
     name: string;
@@ -71,7 +72,7 @@ export class AuthService {
                 //3.
                 this.authSubject.next(data);
             }),
-            catchError(this.errors)
+            catchError(errors)
         );
     }
 
@@ -79,7 +80,7 @@ export class AuthService {
         let URL=urlSignUp;
         return this.http
             .post(`${URL}`, data)
-            .pipe(catchError(this.errors));
+            .pipe(catchError(errors));
     }
 
     restoreUser() {
@@ -118,26 +119,6 @@ export class AuthService {
         }, expMs);
     }
 
-    private errors(err: any) {
-        switch (err.error) {
-            case 'Email and password are required':
-                // return throwError('Email e password sono obbligatorie');
-                throw new Error('Email e password sono obbligatorie');
-                break;
-            case 'Email already exists':
-                return throwError('Utente già registrato');
-                break;
-            case 'Email format is invalid':
-                return throwError('Email scritta male');
-                break;
-            case 'Cannot find user':
-                return throwError("L'utente non esiste");
-                break;
-            default:
-                return throwError('Errore nella chiamata');
-                break;
-        }
-    }
 
     // generaErrore() {
     //     throw new Error("errore")

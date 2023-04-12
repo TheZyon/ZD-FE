@@ -14,3 +14,11 @@ export interface ChatMessage{
   time: string
 
 }
+
+export interface ChatUser1User2{
+
+  username1: string,
+  username2: string,
+  messages: ChatMessage[]
+
+}

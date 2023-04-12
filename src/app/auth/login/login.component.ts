@@ -22,6 +22,7 @@ import {notificationsActions} from "../../ngRxState/notifications.actions";
 })
 export class LoginComponent implements OnInit {
 
+    errorMessage: string='';
     loginForm!:FormGroup;
     userInfo:UserDetails|null;
     loginF!:FormGroup;
@@ -61,6 +62,7 @@ export class LoginComponent implements OnInit {
               this.detailsSrv.getAllUsersDetails() // gestire paginazione in caso
             )))
       .subscribe((res)=>{
+
         this.loadLikesInStore(res[0][0], res[0][1]);
         console.log("given likes: ", res[0][0]);
         console.log("received likes: ", res[0][1]);
@@ -70,7 +72,9 @@ export class LoginComponent implements OnInit {
         this.store.dispatch(userDetailsAPIActions.retrievealluserdetails({details: res[1].content}));
         this.store.dispatch(notificationsActions.getnotificationsbe({notifications: res[0][2]}));
         this.router.navigate(['/user']);
-    })
+    },
+        error => this.errorMessage=error.message
+    )
 
 
     /*this.store.dispatch(userDetailsActions.retrievealluserdetails({details: res.content}));*/
