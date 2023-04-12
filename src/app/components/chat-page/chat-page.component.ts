@@ -7,14 +7,19 @@ import {ActivatedRoute} from "@angular/router";
 import {getUsername} from "../../../environments/environment";
 import {chatWithSpecificUser} from "../../ngRxState/chat-message.selectors";
 import {ChatMessage, ChatUser1User2} from "../../models/likes&chat";
+import * as moment from "moment";
 
 
+/*
+* pagina per la chat tra due users: contiene i chatMessage e un form per postare un nuovo messaggio
+* */
 @Component({
   selector: 'app-chat-page',
   templateUrl: './chat-page.component.html',
   styleUrls: ['./chat-page.component.scss']
 })
 export class ChatPageComponent implements OnInit, OnDestroy{
+
 
 
   messages: ChatMessage[]=[];
@@ -32,7 +37,12 @@ export class ChatPageComponent implements OnInit, OnDestroy{
   this.crushDet=JSON.parse(this.route.snapshot.paramMap.get('infoCrush'));
   this.store.select(chatWithSpecificUser(this.crushDet.username)).subscribe(res=>{
   // console.log("la chat con il crush dovrebbe essere: ", res);
-  this.messages=res.messages;
+     this.messages=res.messages.slice().sort((m1,m2)=> {
+
+       return moment(m1.time).diff(m2.time).valueOf();
+     }
+     );
+
   })
 
   }
@@ -47,7 +57,6 @@ export class ChatPageComponent implements OnInit, OnDestroy{
   }
 
   ngOnDestroy(): void {
-
   }
 
 }

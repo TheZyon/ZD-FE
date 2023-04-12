@@ -24,6 +24,7 @@ import { ChatPageComponent } from './components/chat-page/chat-page.component';
 import { ChatMessageComponent } from './library/chat-message/chat-message.component';
 import {chatMessagesReducer} from "./ngRxState/chat-message.reducer";
 import {MyformModule} from "./forms/myform.module";
+import {DatePipe, DateTimePipe} from './pipes/date.pipe';
 
 
 
@@ -40,7 +41,9 @@ import {MyformModule} from "./forms/myform.module";
         CrushesComponent,
         CrushSnapshotComponent,
         ChatPageComponent,
-        ChatMessageComponent
+        ChatMessageComponent,
+        DatePipe,
+        DateTimePipe
     ],
     imports: [
         BrowserModule,
