@@ -2,7 +2,7 @@ import { createActionGroup, props } from '@ngrx/store';
 export const likeActions = createActionGroup({
   source: 'carousel-users',
   events: {
-    'like': props<{ usernameLiked: string }>(), //coppia, username dell'utente loggato e username dell'utente che ha ricevuto il like
+    'like': props<{ usernameLiked: string }>(),
     'dislike': props<{ usernameDisliked: string[] }>()
   }
   });

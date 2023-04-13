@@ -21,7 +21,6 @@ import * as moment from "moment";
 export class ChatPageComponent implements OnInit, OnDestroy{
 
 
-
   messages: ChatMessage[]=[];
 
   crushDet: UserDetails=demoDetails;
@@ -42,9 +41,7 @@ export class ChatPageComponent implements OnInit, OnDestroy{
        return moment(m1.time).diff(m2.time).valueOf();
      }
      );
-
   })
-
   }
 
   sendMessage(){
@@ -55,7 +52,6 @@ export class ChatPageComponent implements OnInit, OnDestroy{
     console.log("the response of the BE is: ", res);
     })
   }
-
 
 
   ngOnDestroy(): void {

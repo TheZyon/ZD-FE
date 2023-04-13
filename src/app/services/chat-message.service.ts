@@ -3,29 +3,55 @@ import {HttpService} from "./http.service";
 import {getUsername, urlAllMessagesUser, urlChatMessages} from "../../environments/environment";
 import {Store} from "@ngrx/store";
 import {ChatMessage, ChatUser1User2} from "../models/likes&chat";
-import {catchError} from "rxjs/operators";
+import {catchError } from "rxjs/operators";
+import {zip} from "rxjs";
 import {errors} from "../../environments/errors";
+import {NotificationsService} from "./notifications.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChatMessageService {
 
-  constructor(private http: HttpService, private store: Store) { }
+  constructor(private http: HttpService,private notificationSrv: NotificationsService, private store: Store) { }
 
 
   //POST
-  postChatMessage( username: string, message: string){
+  postChatMessage( username2: string, message: string){
+
+    let username1= getUsername(); //username logged user
 
     let m : ChatMessage = {
-      username1: getUsername(),
-      username2: username,
+      username1: username1,
+      username2: username2,
       message: message,
       time: (new Date()).toISOString()
     }
 
-    return this.http.post(urlChatMessages, m);
+    return zip(
+      this.http.post(urlChatMessages, m),
+      this.notificationSrv.postNotification(username2,`You've got a message from ${username1}!!`)
+      )
   }
+
+
+
+/*//manda request al BE per creare il like di U1 a U2
+  postLike(unameU1: string, unameU2:string){
+
+    let like:Like={
+      nameU1:unameU1,
+      nameU2:unameU2,
+      time: (new Date()).toISOString()
+    }
+
+    return zip(
+      this.httpSrv.post(urlPostLike, like),
+      this.notificationSrv.postNotification(unameU2,`OMG ${unameU1} liked your dog!!`));
+  }
+*/
+
+
 
 
   //GET
