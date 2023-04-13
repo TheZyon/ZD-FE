@@ -74,10 +74,11 @@ export class LoginComponent implements OnInit {
       }
       )).subscribe(res=>{
       this.updateFromAPISrv.doSubscribe(res[0] as AuthData);
-      })
+      },
+      error => this.errorMessage=error)
 
   }
-  
+
   ngOnDestroy(){
     //if(this.loginSub) this.loginSub.unsubscribe();
     if(this.userInfoSub)this.userInfoSub.unsubscribe();
