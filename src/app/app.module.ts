@@ -25,6 +25,10 @@ import { ChatMessageComponent } from './library/chat-message/chat-message.compon
 import {chatMessagesReducer} from "./ngRxState/chat-message.reducer";
 import {MyformModule} from "./forms/myform.module";
 import {DatePipe, DateTimePipe} from './pipes/date.pipe';
+import {CloudinaryModule} from "@cloudinary/ng";
+import { ExampleCloudinaryComponent } from './components/example-cloudinary/example-cloudinary.component';
+import { CarouselUserImagesComponent } from './components/carousel-user-images/carousel-user-images.component';
+
 
 
 
@@ -43,7 +47,9 @@ import {DatePipe, DateTimePipe} from './pipes/date.pipe';
         ChatPageComponent,
         ChatMessageComponent,
         DatePipe,
-        DateTimePipe
+        DateTimePipe,
+        ExampleCloudinaryComponent,
+        CarouselUserImagesComponent
     ],
     imports: [
         BrowserModule,
@@ -60,7 +66,8 @@ import {DatePipe, DateTimePipe} from './pipes/date.pipe';
             notifications: notificationsReducer,
             chatMessage: chatMessagesReducer
         }),
-        MyformModule
+        MyformModule,
+        CloudinaryModule
     ],
     providers: [
       // {provide: USERNAME_TOKEN, useFactory: loggedUserUsername, deps:[AuthService]}

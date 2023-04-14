@@ -7,6 +7,7 @@ import {NotificationsComponent} from "./components/notifications/notifications.c
 import {CrushesComponent} from "./components/crushes/crushes.component";
 import {CrushSnapshotComponent} from "./components/crush-snapshot/crush-snapshot.component";
 import {ChatPageComponent} from "./components/chat-page/chat-page.component";
+import {ExampleCloudinaryComponent} from "./components/example-cloudinary/example-cloudinary.component";
 
 
 const routes: Routes = [
@@ -48,6 +49,10 @@ const routes: Routes = [
     path:'chat',
     component: ChatPageComponent,
     canActivate:[AuthGuard]
+  },
+  {
+    path:'iUpload',
+    component: ExampleCloudinaryComponent
   },
   {
     path: 'userUtils',

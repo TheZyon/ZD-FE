@@ -13,18 +13,9 @@ import {loggedUserDetails, usersDetailsFeatureSelector} from "./ngRxState/userDe
 export class AppComponent {
 
 
-
   constructor(private store: Store, private httpSrv: HttpService) {
-  // this.loadUsersDetails();
   }
 
-  //carica in Store l'array con i dettagli degli utenti del sito
-  loadUsersDetails(){/*
-    this.httpSrv.get(urlAllUserDetails+"/0").subscribe(res=>{ // gestire paginazione in caso
-    this.store.dispatch(userDetailsActions.retrievealluserdetails({details: res.content}));
-    // console.log(res);
-    })*/
-  }
 
   errorMessage='';
   //mostra i userDetails contenuti in Store

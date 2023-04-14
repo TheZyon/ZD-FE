@@ -1,0 +1,6 @@
+
+<advanced-image *ngIf="!imagesInfo.thereAreNoImgs" [cldImg]="imagesInfo.getCurrentPic()"></advanced-image>
+<p *ngIf="imagesInfo.thereAreNoImgs"> questo utente non ha immagini!!!</p>
+<button type="button" class="btn btn-primary" (click)="imagesInfo.prevPic()">prev</button>
+<button type="button" class="btn btn-primary"(click)="imagesInfo.nextPic()">next</button>
+
