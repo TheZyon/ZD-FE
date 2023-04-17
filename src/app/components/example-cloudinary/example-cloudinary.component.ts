@@ -1,9 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {CloudinaryImage} from "@cloudinary/url-gen";
 import {cld} from "../../../environments/cloudinary";
 import {ProfilePicsService} from "../../services/profile-pics.service";
 import {ProfilePic} from "../../models/profilePic";
 import {ImgsCarouselObject} from "../../utils/picsUtils";
+import {getUsername} from "../../../environments/environment";
+import {BehaviorSubject, concatMap} from "rxjs";
 
 
 @Component({
@@ -16,7 +18,9 @@ export class ExampleCloudinaryComponent implements OnInit{
   infoImgs: ImgsCarouselObject;
   myWidget = this.picsSrv.myWidget;
 
-
+  isOfLoggedUser: boolean=false;
+  @Input() username: string;
+  @Input() username$: BehaviorSubject<string>;
   constructor(private picsSrv: ProfilePicsService) {
   }
 
@@ -26,7 +30,20 @@ export class ExampleCloudinaryComponent implements OnInit{
  * 3. crea un ImgCarouselObject con le immagini
  * */
   ngOnInit(): void {
-    this.picsSrv.getByUsername().subscribe(res=>{ //1.
+
+    console.log("init example-cloudinary");
+
+
+    if(!this.username$) this.username$ = new BehaviorSubject<string>(getUsername()); /*se npn si è ricevuto il subject dal padre, lo inizializzi con il nome dell'utente loggato*/
+
+    this.username$.pipe(concatMap(username=> {
+      console.log("new username received by example-cloudinary: ", username)
+
+      this.isOfLoggedUser= username == getUsername()
+
+      return this.picsSrv.getByUsername(username)
+    }))
+    .subscribe(res=>{ //1.
 
       let imgArray: CloudinaryImage[]=[];
 
@@ -35,7 +52,8 @@ export class ExampleCloudinaryComponent implements OnInit{
       this.infoImgs= new ImgsCarouselObject(imgArray); //3.
       this.infoImgs.resizePics();
 
-    })
+    },
+      error => console.log("error in PICSRV: ", error.message))
   }
 
 

@@ -4,6 +4,9 @@ import {Observable, Subject, Subscription} from "rxjs";
 import {UserDetails} from "../../models/models";
 import {loggedUserDetails, usersDetailsFeatureSelector} from "../../ngRxState/userDetails.selectors";
 import {reciprocalLikesSelector} from "../../ngRxState/likes.selectors";
+import {Loading} from "../../utils/loadingSpinnerUtil";
+import {Username$} from "../carousel-users/carousel-users.component";
+import {getUsername} from "../../../environments/environment";
 
 @Component({
   selector: 'app-user-page',
@@ -12,21 +15,35 @@ import {reciprocalLikesSelector} from "../../ngRxState/likes.selectors";
 })
 export class UserPageComponent implements OnInit, OnDestroy{
 
+  edit_mode: boolean=false;
+  loading: Loading = new Loading();
+
+  username$: Username$;
+
   details: UserDetails;
   loggedUserDetails$: Observable<UserDetails>=this.store.select(loggedUserDetails); //obs che streamma i userDetails dello user loggato
   private loggedUserDetailSub: Subscription;
-  tempReciprocalLikes$: Observable<string[]>= this.store.select(reciprocalLikesSelector); //obs che teniamo qui temporaneamente --> mostra i likes reciproci
   reciprocalLikesSub: Subscription;
   constructor(private store: Store) {
   }
 
   ngOnInit(): void {
+
+    this.username$= new Username$();
+
+    this.username$.next(getUsername())
+
     this.loggedUserDetailSub=this.loggedUserDetails$.subscribe(res=>{
     this.details=res;
+    if(res) this.loading.loading.next(false)
+
     })
-    this.reciprocalLikesSub= this.tempReciprocalLikes$.subscribe(res=>{
-    console.log("reciprocal likes are....: ", res);
-    })
+
+  }
+
+
+  toggleEditMode(){
+    this.edit_mode=!this.edit_mode;
   }
 
   ngOnDestroy(): void {
@@ -35,3 +52,4 @@ export class UserPageComponent implements OnInit, OnDestroy{
   }
 
 }
+

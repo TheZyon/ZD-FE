@@ -21,8 +21,8 @@ export class ProfilePicsService {
   }
 
   //GET
-  getByUsername(): Observable<ProfilePic[]>{
-    return this.http.get(urlProfilePics+`/${getUsername()}`);
+  getByUsername(username:string): Observable<ProfilePic[]>{
+    return this.http.get(urlProfilePics+`/${username}`);
   }
 
 

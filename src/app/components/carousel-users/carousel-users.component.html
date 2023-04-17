@@ -1,13 +1,22 @@
-<p>carousel-users works!</p>
 
+
+
+<h1>{{username$.username|async}}</h1>
 
 <div *ngIf="!thereAreNoMoreUsers">
-  <app-user-card [userDetails]="details[indexCurrentUser]" (nextEvent)="next($event)" (likeEvent)="like($event)" [showLikeBtns]="true"></app-user-card>
+  <app-user-card [userDetails]="details[indexCurrentUser]" (nextEvent)="next($event)" (likeEvent)="like($event)" [showLikeBtns]="true">
+
+    <app-example-cloudinary  [username$]="username$.username" pics></app-example-cloudinary>
+
+  </app-user-card>
+
 </div>
 
-<div *ngIf="thereAreNoMoreUsers">
+<div *ngIf="thereAreNoMoreUsers" class="d-flex flex-row justify-content-between align-items-center container">
+  <img src="/assets/icons/003-pet-bowl.png" alt="no-more-users-icon t-icon float-start">
   <h2>
-    no more users to see for today!!
+    No more users to see for today!!
   </h2>
+  <img src="/assets/icons/003-pet-bowl.png" alt="no-more-users-icon t-icon float-end">
 </div>
 

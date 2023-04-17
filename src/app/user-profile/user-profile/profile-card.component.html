@@ -1,8 +1,10 @@
-<div class="container">
+<div>
   <div>
-    <img height="100px" src="/assets/profiloA.jpg" alt="immagineDemo" class="circ">
+    <ng-content select="[pics]"></ng-content>
+
   </div>
   <div>
+    <ng-content select="[edit-i]"></ng-content>
     <div class="text-center">
       <h3>{{userDetails.dogName}}</h3>
       <h6>{{userDetails.dogAge}} yo,{{userDetails.dogSex|sex}} {{userDetails.breed}}...the owner is {{userDetails.username}}!</h6>
@@ -13,7 +15,12 @@
     </div>
   </div>
 
-  <button type="button" class="btn btn-success" *ngIf="showLikeBtns" (click)="like()">like</button> <!--lancia likeEvent al padre-->
-  <button type="button" class="btn btn-danger" *ngIf="showLikeBtns" (click)="next()">skippa</button><!--lancia nextEvent al padre-->
-  <button type="button" class="btn btn-primary" (click)="printUsernames()">print usernames</button>
+  <div class="d-flex flex-row justify-content-around"><!--div like/dislike btns-->
+    <img src="/assets/icons/022-heart-1.png" alt="like-i" class="t-icon" *ngIf="showLikeBtns" (click)="like()">
+    <img src="/assets/icons/023-close.png" alt="dislike-i" class="t-icon" *ngIf="showLikeBtns" (click)="next()">
+  </div>
+
+  <!--<button type="button" class="btn btn-success" *ngIf="showLikeBtns" (click)="like()">like</button> &lt;!&ndash;lancia likeEvent al padre&ndash;&gt;
+  <button type="button" class="btn btn-danger" *ngIf="showLikeBtns" (click)="next()">skippa</button>&lt;!&ndash;lancia nextEvent al padre&ndash;&gt;
+  <button type="button" class="btn btn-primary" (click)="printUsernames()">print usernames</button>-->
 </div>

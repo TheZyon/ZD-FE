@@ -28,6 +28,7 @@ import {DatePipe, DateTimePipe} from './pipes/date.pipe';
 import {CloudinaryModule} from "@cloudinary/ng";
 import { ExampleCloudinaryComponent } from './components/example-cloudinary/example-cloudinary.component';
 import { CarouselUserImagesComponent } from './components/carousel-user-images/carousel-user-images.component';
+import { DogSpinnerComponent } from './components/dog-spinner/dog-spinner.component';
 
 
 
@@ -49,7 +50,8 @@ import { CarouselUserImagesComponent } from './components/carousel-user-images/c
         DatePipe,
         DateTimePipe,
         ExampleCloudinaryComponent,
-        CarouselUserImagesComponent
+        CarouselUserImagesComponent,
+        DogSpinnerComponent
     ],
     imports: [
         BrowserModule,
@@ -73,6 +75,7 @@ import { CarouselUserImagesComponent } from './components/carousel-user-images/c
       // {provide: USERNAME_TOKEN, useFactory: loggedUserUsername, deps:[AuthService]}
     ],
     exports: [
+        ExampleCloudinaryComponent
 
     ],
     bootstrap: [AppComponent]

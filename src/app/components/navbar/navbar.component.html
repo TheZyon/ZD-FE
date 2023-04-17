@@ -1,29 +1,48 @@
 <nav class="navbar navbar-expand mb-3 navbar-light bg-light">
     <div class="container-fluid">
+      <a class="navbar-brand" href="#">
+        <div class="d-flex flex-column align-items-center justify-content-center text-center brand-div">
+          <img src="/assets/icons/012-dog-1.png" alt="i-brand">
+          <p>Zyon-Dating</p>
+        </div>
+      </a>
         <div class="collapse navbar-collapse" id="navbarToggler">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
                 <li class="nav-item">
-                    <a class="nav-link" *ngIf="!isLoggedIn" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
+                    <a class="nav-link" *ngIf="!isLoggedIn" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                      <img src="/assets/icons/002-dog-house.png" alt="home-img" >
+                    </a>
                 </li>
+
                <li class="nav-item" *ngIf="!isLoggedIn">
                 <a class="nav-link" [routerLink]="['/login']" routerLinkActive="active">Login</a>
                </li>
+
                <li class="nav-item" *ngIf="!isLoggedIn">
                 <a class="nav-link" [routerLink]="['/userUtils/form']" routerLinkActive="active">Signup</a>
                </li>
 
               <!-- se user loggato-->
               <li class="nav-item" *ngIf="isLoggedIn">
-                <a class="nav-link" [routerLink]="['/user']" routerLinkActive="active">Profilo</a>
+                <a class="nav-link" [routerLink]="['/user']" routerLinkActive="active">
+                  <img src="/assets/icons/001-medal.png" alt="i-user-page" class="nav-icon">
+                </a>
               </li>
               <li class="nav-item" *ngIf="isLoggedIn">
-                <a class="nav-link" [routerLink]="['/users']" routerLinkActive="active" >Users</a>
+                <a class="nav-link" [routerLink]="['/users']" routerLinkActive="active" >
+                  <img src="/assets/icons/tinder.png" alt="i-users" class="nav-icon">
+                </a>
               </li>
               <li class="nav-item" *ngIf="isLoggedIn">
-                <a class="nav-link" [routerLink]="['/notifications']" routerLinkActive="active">Notifications</a>
+                <a class="nav-link" [routerLink]="['/notifications']" routerLinkActive="active">
+                  <img src="/assets/icons/026-chat-1.png" alt="i-notifications" class="nav-icon">
+                </a>
               </li>
               <li class="nav-item" *ngIf="isLoggedIn">
-                <a class="nav-link" [routerLink]="['/crushes']" routerLinkActive="active">Crushes</a>
+                <a class="nav-link" [routerLink]="['/crushes']" routerLinkActive="active">
+                  <img src="/assets/icons/006-dog.png" alt="i-crushes" class="nav-icon">
+                </a>
               </li>
             </ul>
             <button type="button" class="btn btn-danger" (click)="onLogout()" *ngIf="isLoggedIn">Logout</button>

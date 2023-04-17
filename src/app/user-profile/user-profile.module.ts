@@ -30,11 +30,11 @@ const routes: Routes=[
     ProfileCard,
     CrushViewComponent
   ],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(routes),
-    ReactiveFormsModule,
-    MyformModule
-  ]
+    imports: [
+        CommonModule,
+        RouterModule.forChild(routes),
+        ReactiveFormsModule,
+        MyformModule
+    ]
 })
 export class UserProfileModule { }

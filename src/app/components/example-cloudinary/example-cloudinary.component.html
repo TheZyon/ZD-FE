@@ -1,6 +1,9 @@
 
 
-<button id="upload_widget" class="cloudinary-button" (click)="myWidget.open()">Upload files</button>
+<!--carousel of user images-->
+<div>
+  <!--upload btn -->
+  <img src="/assets/icons/018-pencil.png" alt="edit-pic" (click)="myWidget.open()" *ngIf="isOfLoggedUser" class="t-icon">
+  <app-carousel-user-images [imagesInfo]="infoImgs"></app-carousel-user-images>
 
-
-<app-carousel-user-images [imagesInfo]="infoImgs"></app-carousel-user-images>
+</div>

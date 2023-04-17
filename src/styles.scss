@@ -2,3 +2,16 @@
 .circ{
   border-radius: 50%;
 }
+
+.t-icon{
+  height: 30px;
+  &:hover{
+    transition: 0.5s;
+    transform: scale(1.2);
+    filter: brightness(200%);
+  }
+}
+
+app-dog-spinner{
+  position: relative;
+}

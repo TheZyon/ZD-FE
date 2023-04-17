@@ -1,6 +1,11 @@
-
+<img src="/assets/icons/icons8-back-80.png" alt="dislike-icon" class="t-icon float-start i-prev" (click)="imagesInfo.prevPic()"  *ngIf="imagesInfo.imgsSize>0">
 <advanced-image *ngIf="!imagesInfo.thereAreNoImgs" [cldImg]="imagesInfo.getCurrentPic()"></advanced-image>
-<p *ngIf="imagesInfo.thereAreNoImgs"> questo utente non ha immagini!!!</p>
-<button type="button" class="btn btn-primary" (click)="imagesInfo.prevPic()">prev</button>
-<button type="button" class="btn btn-primary"(click)="imagesInfo.nextPic()">next</button>
+
+<div *ngIf="imagesInfo.thereAreNoImgs"> <!--if user hasn't posted any profile pics-->
+  <img class="no-imgs-img" src="/assets/images/sheerlock-dog.webp" alt="no-img-found-image">
+  <p > questo utente non ha immagini!!!</p>
+</div>
+
+
+<img src="/assets/icons/icons8-chevron-right-80.png" alt="like-icon" class="t-icon float-end i-next" (click)="imagesInfo.nextPic()" *ngIf="imagesInfo&&imagesInfo.imgsSize>0">
 

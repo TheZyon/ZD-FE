@@ -1,6 +1,10 @@
 import {CloudinaryImage} from "@cloudinary/url-gen";
 import {mod} from "./modulo";
-import {fill} from "@cloudinary/url-gen/actions/resize";
+import {crop, fill, pad, scale} from "@cloudinary/url-gen/actions/resize";
+import {format} from "@cloudinary/url-gen/actions/delivery";
+import {auto} from "@cloudinary/url-gen/qualifiers/dpr";
+import {outline, shadow} from "@cloudinary/url-gen/actions/effect";
+import {predominantGradient} from "@cloudinary/url-gen/qualifiers/background";
 
 
 export class ImgsCarouselObject {/*class for handling the custom image carousel associated to a CloudinaryImage[]*/
@@ -36,5 +40,12 @@ export class ImgsCarouselObject {/*class for handling the custom image carousel 
 
 
 export function picResize(pic: CloudinaryImage): CloudinaryImage{
-    return pic.resize(fill().width(250).height(250));
+    return pic.resize(
+      fill()
+        .width(390)
+        .height(390)
+        .gravity(auto())
+    )
+      .delivery(format(auto()))
+
 }

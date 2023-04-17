@@ -1,0 +1,11 @@
+.nav-icon{
+  height: 30px;
+  &:hover{
+    transition: 0.5s;
+    transform: scale(1.4);
+  }
+}
+
+.brand-div{
+  transform: scale(0.7);
+}

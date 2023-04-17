@@ -1,7 +1,7 @@
 import {Component, Inject, OnDestroy, OnInit} from '@angular/core';
 import {UserDetailsService} from "../../services/user-details.service";
 import {demoDetails, UserDetails} from "../../models/models";
-import {Observable, Subscription} from "rxjs";
+import {BehaviorSubject, Observable, Subscription} from "rxjs";
 import {
   likedUsersDetails,
   loggedUserDetails,
@@ -28,8 +28,17 @@ export class CarouselUsersComponent implements OnInit, OnDestroy{
   likes$: Observable<string[]>=this.store.select(userLikesFeatureSelector);
   tempLikesSub: Subscription; //TODO: temp, for likes debugging
   private detailsSub: Subscription; //sub to see users to possibly like
-  indexCurrentUser:number=0; //indice in details dell'utente attualmente visualizzato nel carousel
+  indexCurrentUser:number=-1; //indice in details dell'utente attualmente visualizzato nel carousel
+
   thereAreNoMoreUsers=false;
+
+
+  currentUserUsername$=new BehaviorSubject<string|null>(null);
+
+  username$:Username$=new Username$();
+
+
+
   constructor(private store: Store, private likesSrv: LikesService) {
   }
 
@@ -39,10 +48,20 @@ export class CarouselUsersComponent implements OnInit, OnDestroy{
   * */
   ngOnInit(): void {
 
-   this.detailsSub=this.details$.subscribe(res=>{
+
+
+
+    this.detailsSub=this.details$.subscribe(res=>{
       this.details=res;
       console.log(" utenti non ancora likeati: ", res);
+
+
       if(this.details.length==0) this.thereAreNoMoreUsers=true;
+      if(this.indexCurrentUser==-1) { //prima di mostrare il primo user
+        this.username$.next(this.details[0].username);
+        this.indexCurrentUser++;
+      }
+
     })
     this.tempLikesSub=this.likes$.subscribe(res=>{
     console.log("likes of this user are: ", res);
@@ -63,6 +82,7 @@ export class CarouselUsersComponent implements OnInit, OnDestroy{
   next(username:any){
     console.log("info details.length: ", this.details.length, "info current index: ", this.indexCurrentUser, "username current user: ", username);
     this.indexCurrentUser +1 == this.details.length ? this.thereAreNoMoreUsers=true : this.indexCurrentUser++;
+    this.username$.next(this.details[this.indexCurrentUser].username);
     }
 
     /*
@@ -82,3 +102,23 @@ export class CarouselUsersComponent implements OnInit, OnDestroy{
   }
 
 }
+
+export class Username${
+
+  private username$: BehaviorSubject<string|null>
+
+  constructor() {
+  this.username$=new BehaviorSubject<string | null>(null);
+  }
+
+   next(username: string){
+    this.username$.next(username);
+    console.log("now username streamed by Username$ is ", username)
+  }
+
+   get username(){
+    return this.username$;
+  }
+
+}
+

@@ -1,5 +1,15 @@
-<p>Profilo</p>
 
-<a routerLink='/userUtils/form'>Modifica Profilo</a>
+<app-dog-spinner *ngIf="loading.loading|async"></app-dog-spinner>
 
-<app-user-card [userDetails]="details" [showLikeBtns]="false"></app-user-card>
+<div *ngIf="!(loading.loading|async)">
+
+  <img src="/assets/icons/020-draw.png" alt="i-edit" class="t-icon  float-end" (click)="toggleEditMode()">
+
+  <!--<a routerLink='/userUtils/form'>Modifica Profilo</a>-->
+
+  <app-user-card [userDetails]="details" [showLikeBtns]="false">
+
+    <app-example-cloudinary  [username$]="username$.username" pics></app-example-cloudinary>
+    <img routerLink='/userUtils/form' src="/assets/icons/020-draw.png" alt="i-edit" class="t-icon  float-end" *ngIf="edit_mode" edit-i>
+  </app-user-card>
+</div>
