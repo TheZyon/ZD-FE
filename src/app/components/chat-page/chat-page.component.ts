@@ -25,6 +25,8 @@ export class ChatPageComponent implements OnInit, OnDestroy{
 
   crushDet: UserDetails=demoDetails;
   usernameLoggedUser=getUsername();
+
+
   constructor(private store: Store, private chatSrv: ChatMessageService, private fb: FormBuilder, private route: ActivatedRoute) {
   }
 

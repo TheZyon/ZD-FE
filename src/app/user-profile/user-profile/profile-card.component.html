@@ -5,12 +5,33 @@
   </div>
   <div>
     <ng-content select="[edit-i]"></ng-content>
-    <div class="text-center">
-      <h3>{{userDetails.dogName}}</h3>
-      <h6>{{userDetails.dogAge}} yo,{{userDetails.dogSex|sex}} {{userDetails.breed}}...the owner is {{userDetails.username}}!</h6>
-      <p>
-        {{userDetails.description ? userDetails.description : tempNoDescriptionPlaceholder}}
-      </p>
+    <div class="text-center d-flex flex-column justify-content-center align-items-center mt-4">
+      <h3 class="dog-name">{{userDetails.dogName}}</h3>
+      <ul>
+        <li class="d-flex mb-4 mt-4">
+          <img src="/assets/icons/002-back.png" alt="age-icon" class="t-icon info-icon">
+          <div class="ml-4">{{userDetails.dogAge}} years old</div>
+        </li>
+        <li class="d-flex mb-4">
+          <img src="/assets/icons/001-gender.png" alt="sex-icon" class="t-icon info-icon">
+          <div class="ml-4">{{userDetails.dogSex|sex}}</div>
+        </li>
+        <li class="d-flex mb-4">
+          <img src="/assets/icons/003-gold-medal.png" alt="breed-icon" class="t-icon info-icon">
+          <div class="ml-4">breed: {{userDetails.breed}}</div>
+        </li>
+        <li class="d-flex mb-4">
+          <img src="/assets/icons/004-owner.png" alt="owner-icon" class="t-icon info-icon">
+          <div class="ml-4">this dog is owned by: {{userDetails.username}}</div>
+        </li>
+      </ul>
+      <div class="container">
+        <h4>Description</h4>
+        <p>
+          <i>{{userDetails.description ? userDetails.description : tempNoDescriptionPlaceholder}}</i>
+        </p>
+      </div>
+
 
     </div>
   </div>

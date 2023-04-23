@@ -1,7 +1,7 @@
 
 
 
-<h1>{{username$.username|async}}</h1>
+<!--<h1>{{username$.username|async}}</h1>-->
 
 <div *ngIf="!thereAreNoMoreUsers">
   <app-user-card [userDetails]="details[indexCurrentUser]" (nextEvent)="next($event)" (likeEvent)="like($event)" [showLikeBtns]="true">

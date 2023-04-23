@@ -18,6 +18,7 @@ export class ExampleCloudinaryComponent implements OnInit{
   infoImgs: ImgsCarouselObject;
   myWidget = this.picsSrv.myWidget;
 
+  editMode=new BehaviorSubject<boolean>(false);
   isOfLoggedUser: boolean=false;
   @Input() username: string;
   @Input() username$: BehaviorSubject<string>;
@@ -31,13 +32,10 @@ export class ExampleCloudinaryComponent implements OnInit{
  * */
   ngOnInit(): void {
 
-    console.log("init example-cloudinary");
-
 
     if(!this.username$) this.username$ = new BehaviorSubject<string>(getUsername()); /*se npn si è ricevuto il subject dal padre, lo inizializzi con il nome dell'utente loggato*/
 
     this.username$.pipe(concatMap(username=> {
-      console.log("new username received by example-cloudinary: ", username)
 
       this.isOfLoggedUser= username == getUsername()
 
@@ -56,18 +54,4 @@ export class ExampleCloudinaryComponent implements OnInit{
       error => console.log("error in PICSRV: ", error.message))
   }
 
-
-
-
-// Import the Cloudinary classes.
-
-
-/*https://res.cloudinary.com/dk4tnmdfd/image/upload/v1681394994/pm457upfgmbylrbjugee.jpg*/
-
-
-
-
 }
-
-
-

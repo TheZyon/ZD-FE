@@ -1,17 +1,15 @@
-<div class="container">
+<div class="container d-flex flex-column">
 
-  <div class="container" *ngFor="let message of messages; let i = index">
-
-
-    <app-chat-message [message]="message" [isOfUser]="message.username1==usernameLoggedUser"></app-chat-message>
-
-
+  <div class="d-flex flex-column messages-div">
+    <app-chat-message class="float-end" *ngFor="let message of messages; let i = index" [message]="message" [isOfUser]="message.username1==usernameLoggedUser"></app-chat-message>
   </div>
 
-  <form [formGroup]="messageInput" (ngSubmit)="sendMessage()">
-
+<div class="fixed-bottom-1 fixed-center d-flex flex-column justify-content-center ">
+  <form  [formGroup]="messageInput" (ngSubmit)="sendMessage()">
     <app-text-area label="" formControlName="message"></app-text-area>
-
     <button type="submit" class="btn btn-primary mt-3" [disabled]="!messageInput.valid">send!</button>
   </form>
+</div>
+
+
 </div>

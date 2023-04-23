@@ -20,4 +20,5 @@ export class TextAreaComponent extends BaseInputComponent{
     super(controlContainer);
   }
 
+  width = `${screen.width*0.9 }px`;
 }

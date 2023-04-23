@@ -3,12 +3,13 @@
 
 <div *ngIf="!(loading.loading|async)">
 
-  <img src="/assets/icons/020-draw.png" alt="i-edit" class="t-icon  float-end" (click)="toggleEditMode()">
+  <div class="d-flex flex-row align-items-center">
+    <div class="col-6 text-center div-edit"><p [ngClass]="{active: edit_mode}" (click)="editMode()">edit</p></div>
+    <div class="col-6 text-center"><p [ngClass]="{active: !edit_mode}" (click)="preview()">preview</p></div>
+  </div>
 
-  <!--<a routerLink='/userUtils/form'>Modifica Profilo</a>-->
-
+  <!--anteprima profilo utente-->
   <app-user-card [userDetails]="details" [showLikeBtns]="false">
-
     <app-example-cloudinary  [username$]="username$.username" pics></app-example-cloudinary>
     <img routerLink='/userUtils/form' src="/assets/icons/020-draw.png" alt="i-edit" class="t-icon  float-end" *ngIf="edit_mode" edit-i>
   </app-user-card>

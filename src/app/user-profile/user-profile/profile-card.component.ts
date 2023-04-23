@@ -4,8 +4,7 @@ import {UserDetails} from "../../models/models";
 @Component({
   selector: 'app-user-card',
   templateUrl: './profile-card.component.html',
-  styles: [
-  ]
+  styleUrls: ['./profile-card.component.scss']
 })
 export class ProfileCard{
   constructor() {}

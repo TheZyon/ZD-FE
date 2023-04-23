@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Store} from "@ngrx/store";
-import {Observable, Subject, Subscription} from "rxjs";
+import {BehaviorSubject, Observable, Subject, Subscription} from "rxjs";
 import {UserDetails} from "../../models/models";
 import {loggedUserDetails, usersDetailsFeatureSelector} from "../../ngRxState/userDetails.selectors";
 import {reciprocalLikesSelector} from "../../ngRxState/likes.selectors";
@@ -14,6 +14,10 @@ import {getUsername} from "../../../environments/environment";
   styleUrls: ['./user-page.component.scss']
 })
 export class UserPageComponent implements OnInit, OnDestroy{
+
+
+  /*experiment with a class for managing the edit mode*/
+  edit: EditMode = new EditMode();
 
   edit_mode: boolean=false;
   loading: Loading = new Loading();
@@ -46,6 +50,13 @@ export class UserPageComponent implements OnInit, OnDestroy{
     this.edit_mode=!this.edit_mode;
   }
 
+  editMode(){
+    this.edit_mode=true;
+  }
+  preview(){
+    this.edit_mode=false;
+  }
+
   ngOnDestroy(): void {
     if(this.loggedUserDetailSub) this.loggedUserDetailSub.unsubscribe();
     if(this.reciprocalLikesSub) this.reciprocalLikesSub.unsubscribe();
@@ -53,3 +64,16 @@ export class UserPageComponent implements OnInit, OnDestroy{
 
 }
 
+export class EditMode{
+  mode$: BehaviorSubject<boolean>;
+  constructor() {
+  this.mode$= new BehaviorSubject<boolean>(false);
+  }
+
+  editOn(){
+    this.mode$.next(true);
+  }
+  editOff(){
+    this.mode$.next(false);
+  }
+}

@@ -1,7 +1,46 @@
 /* You can add global styles to this file, and also import other style files */
+
+
+
+
+.main{
+  margin-top:11rem;
+  margin-bottom: 4rem;
+}
+
+
+
+
+.zd-bg{
+  background: rgb(255,105,105);
+  background: linear-gradient(90deg, rgba(255,105,105,1) 27%, rgba(255,211,176,1) 70%, rgba(255,249,222,1) 98%);
+}
+
 .circ{
   border-radius: 50%;
 }
+
+.fixed-bottom{
+  position: fixed;
+  bottom:0;
+}
+.fixed-bottom-1{
+  position: fixed;
+  bottom:80px;
+}
+.fixed-center{
+  left:5%;
+}
+
+.fixed-top{
+  position: fixed;
+  top:0;
+}
+
+.sticky{
+  position: sticky;
+}
+
 
 .t-icon{
   height: 30px;

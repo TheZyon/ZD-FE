@@ -1,9 +1,11 @@
 
 
-<!--carousel of user images-->
+
 <div>
   <!--upload btn -->
   <img src="/assets/icons/018-pencil.png" alt="edit-pic" (click)="myWidget.open()" *ngIf="isOfLoggedUser" class="t-icon">
+
+  <!--carousel delle immagini dell'utente-->
   <app-carousel-user-images [imagesInfo]="infoImgs"></app-carousel-user-images>
 
 </div>

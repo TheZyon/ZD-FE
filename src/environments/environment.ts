@@ -7,7 +7,7 @@ import {InjectionToken} from "@angular/core";
 export const environment = {
   production: false
 };
-export const urlBaseBE="http://localhost:9000";
+export const urlBaseBE="http://localhost:19000";
 
 //auth
 export const urlSignUp=urlBaseBE+"/api/auth/signup";

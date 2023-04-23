@@ -1,8 +1,15 @@
 
 
+.user, .crush{
+  width:100px;
+}
+
 .user{
   background-color: aqua;
+  float: end;
+
 }
 .crush{
   background-color: blanchedalmond;
+  float: start;
 }

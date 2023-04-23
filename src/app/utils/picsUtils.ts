@@ -5,6 +5,7 @@ import {format} from "@cloudinary/url-gen/actions/delivery";
 import {auto} from "@cloudinary/url-gen/qualifiers/dpr";
 import {outline, shadow} from "@cloudinary/url-gen/actions/effect";
 import {predominantGradient} from "@cloudinary/url-gen/qualifiers/background";
+import {byRadius} from "@cloudinary/url-gen/actions/roundCorners";
 
 
 export class ImgsCarouselObject {/*class for handling the custom image carousel associated to a CloudinaryImage[]*/
@@ -42,10 +43,11 @@ export class ImgsCarouselObject {/*class for handling the custom image carousel 
 export function picResize(pic: CloudinaryImage): CloudinaryImage{
     return pic.resize(
       fill()
-        .width(390)
-        .height(390)
+        .width(330)
+        .height(330)
         .gravity(auto())
-    )
+
+    ).roundCorners(byRadius(50))
       .delivery(format(auto()))
 
 }
